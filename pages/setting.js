@@ -1,10 +1,10 @@
+import Layout from '@/components/Layout'
 import React from 'react'
-
 const setting = () => {
   return (
-    <div>
+    <Layout>
       Setting
-    </div>
+    </Layout>
   )
 }
 

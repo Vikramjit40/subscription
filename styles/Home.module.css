@@ -1,3 +1,4 @@
+@import "//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css";
 .main {
   display: flex;
   flex-direction: column;
@@ -6,7 +7,10 @@
   padding: 6rem;
   min-height: 100vh;
 }
-
+.search::-webkit-input-placeholder { 
+  font-family: FontAwesome;
+  
+  }
 .description {
   display: inherit;
   justify-content: inherit;

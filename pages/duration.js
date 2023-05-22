@@ -1,10 +1,10 @@
 import React from 'react'
-
+import Layout from '@/components/Layout'
 const duration = () => {
   return (
-    <div>
+    <Layout>
       Duration
-    </div>
+    </Layout>
   )
 }
 

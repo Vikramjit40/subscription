@@ -9,7 +9,6 @@
 }
 .search::-webkit-input-placeholder { 
   font-family: FontAwesome;
-  
   }
 .description {
   display: inherit;
@@ -21,6 +20,8 @@
   z-index: 2;
   font-family: var(--font-mono);
 }
+
+
 
 .description a {
   display: flex;

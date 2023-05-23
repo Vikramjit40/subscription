@@ -12,6 +12,7 @@ module.exports = {
       ...defaultTheme.colors,
       primary:'#3B81F6',
       backcolor:'#F5F5F5',
+      filter:'#dcdcdc',
       white:'#ffffff',
       text: {
         DEFAULT:'#1F2937',

@@ -3,9 +3,8 @@ import classNames from 'classnames'
 import Image from 'next/image'
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-
-
-
+import MOCK_DATA from '@/public/MOCK_DATA.json';
+const tbodyCount=MOCK_DATA.length;
 const menuItems=[
     {id:1,label:"Home",icon:"/home.png",link:"/"},
     {id:2,label:"Duration",icon:"/clock.png",link:"/duration"},
@@ -13,7 +12,6 @@ const menuItems=[
     {id:4,label:"Bank",icon:"/bank.png",link:"/bank"},
     {id:5,label:"Setting",icon:"/settings.png",link:"/setting"},
 ];
-
 const Sidebar = () => {
     const [toggleCollapse,setToggleCollapse]=useState(false);
     const [isCollapsible,setIsCollapsible]=useState(false);
@@ -32,9 +30,9 @@ const Sidebar = () => {
     const onMouseOver=()=>{
         setIsCollapsible(!isCollapsible)
     }
-    
+   
     return (
-    <div className={wrapperClasses} style={{transition:"width 300ms cubic-bezier(0.2,0,0,1)0s"}} onMouseEnter={onMouseOver} onMouseLeave={onMouseOver}>
+    <div className={wrapperClasses} style={{transition:"width 300ms cubic-bezier(0.2,0,0,1)0s",top:"0",left:"0",}} onMouseEnter={onMouseOver} onMouseLeave={onMouseOver}>
       <div className='flex flex-col'>
         <div className='flex items-center justify-between relative'>
             <div className='flex items-center pl-0 pt-2 gap-4'>
@@ -66,7 +64,7 @@ const Sidebar = () => {
         
       </div>
       <div className='flex flex-col items-start '>
-        <p>14/300</p>
+        <p>14/{tbodyCount}</p>
        
         <Link href="/"><Image src="/question.png" width={18} height={18} className='ml-3 mt-6' /></Link>
         <Link href="/"><Image src="/exclamation.png" width={18} height={18}  className='mt-5 ml-3 mb-8' /></Link>

@@ -14,22 +14,22 @@ export const COLUMNS = [
   },
   {
     Header: 'Category',
-    accessor: 'country'
+    accessor: 'category'
     // Filter: ColumnFilter
   },
   {
     Header: 'Cost',
-    accessor: 'phone'
+    accessor: 'cost'
     // Filter: ColumnFilter
   },
   {
     Header: 'Billing Period',
-    accessor: 'age'
+    accessor: 'period'
     // Filter: ColumnFilter
   },
   {
     Header: 'Payment Method',
-    accessor: 'email'
+    accessor: 'payment_method'
     // Filter: ColumnFilter
   },
   {

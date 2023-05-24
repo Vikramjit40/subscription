@@ -1,10 +1,52 @@
-import React, { useState,useMemo } from 'react'
+import React, { useState,useMemo, useEffect } from 'react'
 import classNames from 'classnames'
 import Image from 'next/image'
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import MOCK_DATA from '@/public/MOCK_DATA.json';
+import Progress_bar from './Progress';
 const tbodyCount=MOCK_DATA.length;
+var leng=100;
+export const activeDatalen=(active)=>{
+    if(active){
+        const asd=MOCK_DATA.filter(function (el) {
+            return el.active == true})
+    return document.getElementById("len").innerHTML=asd.length
+}
+else{
+    return document.getElementById("len").innerHTML=MOCK_DATA.length
+}
+}
+export const catDatalen=(value)=>{
+    if(value=="allProjects"){
+        document.getElementById("len").innerHTML=MOCK_DATA.length;
+    }
+    else{
+        const cat=MOCK_DATA.filter(function (el) {
+            return el.category == value})
+    return document.getElementById("len").innerHTML=cat.length;
+    }
+}
+export const payDatalen=(value)=>{
+    if(value=="allProjects"){
+        document.getElementById("len").innerHTML=MOCK_DATA.length;
+    }
+    else{
+        const pay=MOCK_DATA.filter(function (el) {
+            return el.payment_method == value})
+    return document.getElementById("len").innerHTML=pay.length;
+    }
+}
+export const periodDatalen=(value)=>{
+    if(value=="allProjects"){
+        document.getElementById("len").innerHTML=MOCK_DATA.length;
+    }
+    else{
+        const peri=MOCK_DATA.filter(function (el) {
+            return el.period == value})
+    return document.getElementById("len").innerHTML=peri.length;
+    }
+}
 const menuItems=[
     {id:1,label:"Home",icon:"/home.png",link:"/"},
     {id:2,label:"Duration",icon:"/clock.png",link:"/duration"},
@@ -30,7 +72,6 @@ const Sidebar = () => {
     const onMouseOver=()=>{
         setIsCollapsible(!isCollapsible)
     }
-   
     return (
     <div className={wrapperClasses} style={{transition:"width 300ms cubic-bezier(0.2,0,0,1)0s",top:"0",left:"0",}} onMouseEnter={onMouseOver} onMouseLeave={onMouseOver}>
       <div className='flex flex-col'>
@@ -64,8 +105,10 @@ const Sidebar = () => {
         
       </div>
       <div className='flex flex-col items-start '>
-        <p>14/{tbodyCount}</p>
-       
+        <p><span id="len">{tbodyCount}</span>/{tbodyCount}</p>
+        <div className="App">
+      <Progress_bar bgcolor="orange" progress={leng}  height={5} />
+   </div>
         <Link href="/"><Image src="/question.png" width={18} height={18} className='ml-3 mt-6' /></Link>
         <Link href="/"><Image src="/exclamation.png" width={18} height={18}  className='mt-5 ml-3 mb-8' /></Link>
         </div>

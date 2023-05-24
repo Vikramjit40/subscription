@@ -9,6 +9,7 @@
 }
 .search::-webkit-input-placeholder { 
   font-family: FontAwesome;
+  font-size: 10px;
   }
 .description {
   display: inherit;

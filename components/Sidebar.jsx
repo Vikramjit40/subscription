@@ -4,47 +4,55 @@ import Image from 'next/image'
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import MOCK_DATA from '@/public/MOCK_DATA.json';
-import Progress_bar from './Progress';
 const tbodyCount=MOCK_DATA.length;
-var leng=100;
+
 export const activeDatalen=(active)=>{
     if(active){
         const asd=MOCK_DATA.filter(function (el) {
             return el.active == true})
-    return document.getElementById("len").innerHTML=asd.length
+    return (document.getElementById("len").innerHTML=asd.length,
+    document.getElementById("app").style.width=((asd.length/MOCK_DATA.length)*100) +"%"
+    )
 }
 else{
-    return document.getElementById("len").innerHTML=MOCK_DATA.length
+    return (document.getElementById("len").innerHTML=MOCK_DATA.length,
+    document.getElementById("app").style.width=((MOCK_DATA.length/MOCK_DATA.length)*100) +"%")
 }
 }
 export const catDatalen=(value)=>{
     if(value=="allProjects"){
         document.getElementById("len").innerHTML=MOCK_DATA.length;
+        document.getElementById("app").style.width=((MOCK_DATA.length/MOCK_DATA.length)*100) +"%"
     }
     else{
         const cat=MOCK_DATA.filter(function (el) {
             return el.category == value})
-    return document.getElementById("len").innerHTML=cat.length;
+    return (document.getElementById("len").innerHTML=cat.length,
+    document.getElementById("app").style.width=((cat.length/MOCK_DATA.length)*100) +"%");
     }
 }
 export const payDatalen=(value)=>{
     if(value=="allProjects"){
         document.getElementById("len").innerHTML=MOCK_DATA.length;
+        document.getElementById("app").style.width=((MOCK_DATA.length/MOCK_DATA.length)*100) +"%"
     }
     else{
         const pay=MOCK_DATA.filter(function (el) {
             return el.payment_method == value})
-    return document.getElementById("len").innerHTML=pay.length;
+    return (document.getElementById("len").innerHTML=pay.length,
+    document.getElementById("app").style.width=((pay.length/MOCK_DATA.length)*100) +"%");
     }
 }
 export const periodDatalen=(value)=>{
     if(value=="allProjects"){
         document.getElementById("len").innerHTML=MOCK_DATA.length;
+        document.getElementById("app").style.width=((MOCK_DATA.length/MOCK_DATA.length)*100) +"%"
     }
     else{
         const peri=MOCK_DATA.filter(function (el) {
             return el.period == value})
-    return document.getElementById("len").innerHTML=peri.length;
+    return (document.getElementById("len").innerHTML=peri.length,
+    document.getElementById("app").style.width=((peri.length/MOCK_DATA.length)*100) +"%");
     }
 }
 const menuItems=[
@@ -106,8 +114,17 @@ const Sidebar = () => {
       </div>
       <div className='flex flex-col items-start '>
         <p><span id="len">{tbodyCount}</span>/{tbodyCount}</p>
-        <div className="App">
-      <Progress_bar bgcolor="orange" progress={leng}  height={5} />
+        <div style={{height: "5px",
+        width: "3rem",
+        backgroundColor: 'whitesmoke',
+        borderRadius: "40px",
+        margin: "5px"}}>
+      <div id="app" style={{height: '100%',
+        width: `100%`,
+        backgroundColor: "orange",
+       borderRadius:"40px",
+        textAlign: 'right'}}>
+      </div>
    </div>
         <Link href="/"><Image src="/question.png" width={18} height={18} className='ml-3 mt-6' /></Link>
         <Link href="/"><Image src="/exclamation.png" width={18} height={18}  className='mt-5 ml-3 mb-8' /></Link>

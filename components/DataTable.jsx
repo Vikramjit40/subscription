@@ -1,8 +1,12 @@
 import React, { useMemo, useState } from 'react';
-import { useTable, useSortBy } from 'react-table';
+import { useTable, useSortBy,useGlobalFilter, useFilters } from 'react-table';
 import {COLUMNS} from './columns' ;
 import MOCK_DATA from '../public/MOCK_DATA.json';
 import { activeDatalen,catDatalen,payDatalen,periodDatalen } from './Sidebar';
+import styles from '@/styles/Home.module.css';
+import Image from 'next/image';
+import Right from './Right';
+import GlobalFilter from './Globalfilter';
 const SortingTable = props => {
   const [mockData,setMockData]=useState(MOCK_DATA)
   const columns = useMemo(() => COLUMNS, []);
@@ -14,13 +18,17 @@ const SortingTable = props => {
     getTableBodyProps,
     headerGroups,
     rows,
-    prepareRow
+    prepareRow,
+    state: { globalFilter },
+    setGlobalFilter
   } = useTable(
     {
       columns,
       data,
       disableSortRemove: true
     },
+    useFilters,
+    useGlobalFilter,
     useSortBy
   );
   
@@ -80,6 +88,36 @@ const SortingTable = props => {
 
   return (
     <>
+    <div className='row'>
+    <div className='col-lg-8  '>
+     <h1 style={{fontWeight:"bold",fontSize:"25px",marginBottom:"28px"}}>Subscriptions</h1>
+      </div>
+      <div className='col-lg-4 pt-1 ' >
+        <div className='row'>
+            <div className='col-lg' style={{textAlign:"left"}}>
+            <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+            </div>
+            
+            <div className='col-lg-4'style={{textAlign:"left"}}>
+                <button style={{color:"white",backgroundColor:"black",borderRadius:"5px",padding:"3px 5px",fontSize:"12px"}}>+ New Subscription</button>
+            </div>
+            <div className='col-lg mr-6'style={{textAlign:"left",width:"90px"}}>     
+                <select style={{backgroundColor:"#ffffff",padding:"5px 4px",borderRadius:"5px",border:"1px solid black",fontSize:"12px" }}>
+                    <option value="allProjects">All Projects</option>
+                    <option value="openProjects">Open Projects</option>
+                    <option value="closedProjects">Closed Projects</option>
+                </select>
+            </div>
+            
+            <div className='col-lg ml-7 mt-1'style={{textAlign:"left"}}>
+                <Image src={"/logo.jpg"} height={25} width={20} />
+            </div>
+        </div>
+        </div>
+        </div>
+  <div className='row'>
+  <div className='col-lg-8'>
+    <div className='row'>
     <div className=' flex '>
     <p className='mb-3'>Filter: </p>
     <span onClick={() => { activeUser()}} className={active==true ? 'bg-filter px-1 h-7 ml-2 text-center border-0 rounded-md cursor-pointer' : 'bg-light-lighter cursor-pointer px-1 h-7 ml-2 text-center border-2 rounded-md '}><i className="fa fa-circle" style={{fontSize:"10px",color:"green"}} />  Active  <i className="fa fa-random"></i></span>
@@ -117,6 +155,8 @@ const SortingTable = props => {
       <option value="closedProjects">Closed Projects</option>
     </select>
 </div>
+</div>
+
     <div className="table-container" style={{height:"640px",overflow:"scroll",overflowX:"hidden"}}>
      <style jsx>{`
         .table-container::-webkit-scrollbar {
@@ -163,6 +203,11 @@ const SortingTable = props => {
           ))}
         </tfoot> */}
       </table>
+      </div>
+      
+    </div>
+    <div className='col-lg-4'><Right />
+      </div>
     </div>
     </>
   );

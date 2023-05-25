@@ -1,8 +1,15 @@
 import React from 'react'
 import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
+import MOCK_DATA from '../public/MOCK_DATA.json';
 
 const Right = () => {
+  const asd=MOCK_DATA.filter(function (el) {
+    return el.period != "One time"})
+    const sum = asd.reduce((accumulator, object) => {
+      return accumulator + parseInt(object.cost);
+    }, 0);
+    
   return (
     <div className='container' style={{backgroundColor:"#F5F5F5",padding:"0"}}>
         <div className='row pt-1 'style={{textAlign:"right"}}>
@@ -28,7 +35,7 @@ const Right = () => {
             <hr style={{width:"100%",marginLeft:"12px"}} />
         </div>
         
-        <div className='row'><div className='col text-center p-5'><p>Amount</p></div></div>
+        <div className='row'><div className='col text-center p-5'><p>{sum}</p></div></div>
     </div>
     <div className='row bg-white mt-4 mr-2 rounded-md'>
             <div className='row'>

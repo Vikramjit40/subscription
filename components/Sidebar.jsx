@@ -55,6 +55,18 @@ export const periodDatalen=(value)=>{
     document.getElementById("app").style.width=((peri.length/MOCK_DATA.length)*100) +"%");
     }
 }
+export const colorDatalen=(value)=>{
+    if(value=="allProjects"){
+        document.getElementById("len").innerHTML=MOCK_DATA.length;
+        document.getElementById("app").style.width=((MOCK_DATA.length/MOCK_DATA.length)*100) +"%"
+    }
+    else{
+        const colo=MOCK_DATA.filter(function (el) {
+            return el.color == value})
+    return (document.getElementById("len").innerHTML=colo.length,
+    document.getElementById("app").style.width=((colo.length/MOCK_DATA.length)*100) +"%");
+    }
+}
 const menuItems=[
     {id:1,label:"Home",icon:"/home.png",link:"/"},
     {id:2,label:"Duration",icon:"/clock.png",link:"/duration"},

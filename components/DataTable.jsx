@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { useTable, useSortBy,useGlobalFilter, useFilters } from 'react-table';
 import {COLUMNS} from './columns' ;
 import MOCK_DATA from '../public/MOCK_DATA.json';
-import { activeDatalen,catDatalen,payDatalen,periodDatalen } from './Sidebar';
+import { activeDatalen,catDatalen,payDatalen,periodDatalen,colorDatalen } from './Sidebar';
 import styles from '@/styles/Home.module.css';
 import Image from 'next/image';
 import Right from './Right';
@@ -96,6 +96,19 @@ const SortingTable = props => {
     setTimeout(() => {periodDatalen(value)}, 100)
     }
   }
+  function colorChange(event){
+    const value=event.target.value;
+    if(value=="allProjects"){
+    setMockData(MOCK_DATA)
+    setTimeout(() => {colorDatalen(value)}, 100)
+  }
+    else{
+    setMockData(MOCK_DATA.filter(function(el){
+      return el.color==value
+    }))
+    setTimeout(() => {colorDatalen(value)}, 100)
+    }
+  }
   
 
   return (
@@ -156,10 +169,13 @@ const SortingTable = props => {
       <option value="Credit">Credit</option>
       <option value="Invoice">Invoice</option>
     </select>
-    <select className='w-20 h-7 text-center ml-2 border rounded-md bg-filter'>
+    <select onChange={colorChange} className='w-20 h-7 text-center ml-2 border rounded-md bg-filter'>
       <option value="allProjects">Color</option>
-      <option value="openProjects">Open Projects</option>
-      <option value="closedProjects">Closed Projects</option>
+      <option value="rgba(255, 0, 0, 0.4)">Red</option>
+      <option value="rgba(60, 179, 113,0.8)">Green</option>
+      <option value="rgba(109, 143, 172, 0.6)">Grey</option>
+      <option value="rgba(240, 240, 240,0.4)">White</option>
+      <option value="rgba(0, 0, 255, 0.4)">Blue</option>
     </select>
     <select className='w-20 h-7 ml-2 text-center border rounded-md bg-filter'>
       <option value="allProjects">Tags</option>
@@ -205,32 +221,23 @@ const SortingTable = props => {
             );
           })}
         </tbody>
-        {/* <tfoot>
-          {footerGroups.map(footerGroup => (
-            <tr {...footerGroup.getFooterGroupProps()}>
-              {footerGroup.headers.map(column => (
-                <td {...column.getFooterProps()}>{column.render('Footer')} </td>
-              ))}
-            </tr>
-          ))}
-        </tfoot> */}
       </table>
       </div>
  
       <Card.Group className='table-container mt-2 ml-1'id="blockv" style={{display:"none",height:"640px",overflow:"scroll",overflowX:"hidden"}} >
         <Grid columns = { 3 }
         stackable > {
-          MOCK_DATA && MOCK_DATA.map((item) => ( < Grid.Column key = { item.id } style={{paddingBottom:"0"}}>
-                <Card  >
+          mockData && mockData.map((item) => ( < Grid.Column key = { item.id } style={{paddingBottom:"0"}}>
+                <Card style={{backgroundColor:item.color,borderRadius:"8px"}} >
                 <Card.Content > 
                   <img src={`https://picsum.photos/200/300?random=${item.id}`} className='left floated mt-2 mr-1 w-11 h-11'style={{borderRadius:"50px"}}/> 
                 <Card.Header className='left floated' style = {
-                    { marginTop: "10px" }
+                    { marginTop: "10px",color:item.color=="rgba(240, 240, 240,0.4)"?"black":"white" }
                 } > {item.first_name }</Card.Header>    
                 <Card.Header className='right floated' style = {
-                    { marginTop: "13px" ,fontSize:"15px"}
+                    { marginTop: "13px" ,fontSize:"15px", color:item.color=="rgba(240, 240, 240,0.4)"?"black":"white"}
                 } > $ {item.cost}</Card.Header>
-                <Card.Description  ><p className='left floated ml-12'> { item.category } </p><p className='right floated'>{ item.period }</p></Card.Description> 
+                <Card.Description style={{color:item.color=="rgba(240, 240, 240,0.4)"?"black":"white"}} ><p className='left floated ml-12'> { item.category } </p><p className='right floated'>{ item.period }</p></Card.Description> 
                
                 </Card.Content>    
                  </Card>    

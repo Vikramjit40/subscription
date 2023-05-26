@@ -77,7 +77,7 @@ var inactiveStyle = {
             <hr style={{width:"95%",marginLeft:"12px"}} />
         </div>
         
-        <div className='row'><div className='col text-center p-5'><p>{avg} Monthly</p></div></div>
+        <div className='row'><div className='col text-center p-5'><p>$ {avg} Monthly</p></div></div>
     </div>
     <div className='row bg-white mt-4 mr-2 rounded-md'>
             <div className='row'>
@@ -88,7 +88,7 @@ var inactiveStyle = {
         </div>
         
         <div className='row'><div className='col text-center p-5'>
-            <p>{sumOn} All time</p>
+            <p>$ {sumOn} All time</p>
             </div></div>
     </div>
     <div className='row bg-white mt-4 mr-2 rounded-md'>

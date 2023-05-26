@@ -1,6 +1,7 @@
 import '@/styles/globals.css'
 import Head from 'next/head'
 import '../styles/table.css';
+import 'semantic-ui-css/semantic.min.css';
 import Script from 'next/script'
 export default function App({ Component, pageProps }) {
   return <div className=''style={{padding:"0"}}>

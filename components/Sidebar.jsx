@@ -116,12 +116,12 @@ const Sidebar = () => {
         <p><span id="len">{tbodyCount}</span>/{tbodyCount}</p>
         <div style={{height: "5px",
         width: "3rem",
-        backgroundColor: 'whitesmoke',
+        backgroundColor: 'grey',
         borderRadius: "40px",
         margin: "5px"}}>
       <div id="app" style={{height: '100%',
         width: `100%`,
-        backgroundColor: "orange",
+        backgroundColor: "#A020F0",
        borderRadius:"40px",
         textAlign: 'right'}}>
       </div>

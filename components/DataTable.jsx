@@ -7,6 +7,18 @@ import styles from '@/styles/Home.module.css';
 import Image from 'next/image';
 import Right from './Right';
 import GlobalFilter from './Globalfilter';
+import { Card, Grid} from "semantic-ui-react";
+export function blockView(){
+    document.getElementById("listv").style.display="none"
+    document.getElementById("blockv").style.display="block"
+}
+export function listView(){
+  document.getElementById("blockv").style.display="none"
+  document.getElementById("listv").style.display="block"
+}
+export function calanderView(){
+
+}
 const SortingTable = props => {
   const [mockData,setMockData]=useState(MOCK_DATA)
   const columns = useMemo(() => COLUMNS, []);
@@ -110,7 +122,7 @@ const SortingTable = props => {
             </div>
             
             <div className='col-lg ml-7 mt-1'style={{textAlign:"left"}}>
-                <Image src={"/logo.jpg"} height={25} width={20} />
+                <Image src={"/logo.jpg"} height={30} width={25} style={{borderRadius:"50px"}} />
             </div>
         </div>
         </div>
@@ -157,8 +169,8 @@ const SortingTable = props => {
 </div>
 </div>
 
-    <div className="table-container" style={{height:"640px",overflow:"scroll",overflowX:"hidden"}}>
-     <style jsx>{`
+    <div className="table-container "id="listv" style={{height:"640px",overflow:"scroll",overflowX:"hidden"}}>
+     <style jsx global>{`
         .table-container::-webkit-scrollbar {
           display: none;
       }
@@ -204,6 +216,26 @@ const SortingTable = props => {
         </tfoot> */}
       </table>
       </div>
+ 
+      <Card.Group className='table-container mt-2 ml-1'id="blockv" style={{display:"none",height:"640px",overflow:"scroll",overflowX:"hidden"}} >
+        <Grid columns = { 3 }
+        stackable > {
+          MOCK_DATA && MOCK_DATA.map((item) => ( < Grid.Column key = { item.id } style={{paddingBottom:"0"}}>
+                <Card >
+                <Card.Content >  
+                <Card.Header style = {
+                    { marginTop: "10px" }
+                } > {item.first_name +" "+ item.cost}</Card.Header>    
+                
+                <Card.Description > { item.category } </Card.Description> 
+                
+                </Card.Content>    
+                 </Card>    
+                </Grid.Column>
+            ))
+        } </Grid>    
+        </Card.Group>    
+
       
     </div>
     <div className='col-lg-4'><Right />

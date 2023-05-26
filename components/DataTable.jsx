@@ -221,14 +221,17 @@ const SortingTable = props => {
         <Grid columns = { 3 }
         stackable > {
           MOCK_DATA && MOCK_DATA.map((item) => ( < Grid.Column key = { item.id } style={{paddingBottom:"0"}}>
-                <Card >
-                <Card.Content >  
-                <Card.Header style = {
+                <Card  >
+                <Card.Content > 
+                  <img src={`https://picsum.photos/200/300?random=${item.id}`} className='left floated mt-2 mr-1 w-11 h-11'style={{borderRadius:"50px"}}/> 
+                <Card.Header className='left floated' style = {
                     { marginTop: "10px" }
-                } > {item.first_name +" "+ item.cost}</Card.Header>    
-                
-                <Card.Description > { item.category } </Card.Description> 
-                
+                } > {item.first_name }</Card.Header>    
+                <Card.Header className='right floated' style = {
+                    { marginTop: "13px" ,fontSize:"15px"}
+                } > $ {item.cost}</Card.Header>
+                <Card.Description  ><p className='left floated ml-12'> { item.category } </p><p className='right floated'>{ item.period }</p></Card.Description> 
+               
                 </Card.Content>    
                  </Card>    
                 </Grid.Column>

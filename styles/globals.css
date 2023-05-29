@@ -103,6 +103,7 @@ a {
   color: inherit;
   text-decoration: none;
 }
+svg {display: inline;}
 
 @media (prefers-color-scheme: dark) {
   html {

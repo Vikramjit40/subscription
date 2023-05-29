@@ -14,6 +14,8 @@ module.exports = {
       backcolor:'#F5F5F5',
       filter:'#dcdcdc',
       white:'#ffffff',
+      textColor:"rgba(0,0,0,0.64)",
+      hoverCol:"#e2e8f0",
       text: {
         DEFAULT:'#1F2937',
         light:"#6C7281",

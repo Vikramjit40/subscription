@@ -1,9 +1,11 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState,useEffect } from 'react';
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import moment from "moment";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useTable, useSortBy,useGlobalFilter, useFilters } from 'react-table';
 import {COLUMNS} from './columns' ;
 import MOCK_DATA from '../public/MOCK_DATA.json';
 import { activeDatalen,catDatalen,payDatalen,periodDatalen,colorDatalen } from './Sidebar';
-import styles from '@/styles/Home.module.css';
 import Image from 'next/image';
 import Right from './Right';
 import GlobalFilter from './Globalfilter';
@@ -11,19 +13,28 @@ import { Card, Grid} from "semantic-ui-react";
 export function blockView(){
     document.getElementById("listv").style.display="none"
     document.getElementById("blockv").style.display="block"
+    document.getElementById("calenderView").style.display="none"
 }
 export function listView(){
   document.getElementById("blockv").style.display="none"
   document.getElementById("listv").style.display="block"
+  document.getElementById("calenderView").style.display="none"
 }
 export function calanderView(){
-
+document.getElementById("calenderView").style.display="block"
+document.getElementById("blockv").style.display="none"
+document.getElementById("listv").style.display="none"
 }
+moment.locale("en");
+  const localizer= momentLocalizer(moment)
+  
 const SortingTable = props => {
   const [mockData,setMockData]=useState(MOCK_DATA)
   const columns = useMemo(() => COLUMNS, []);
   const data = mockData;
   const [active,setActive]=useState(true);
+  const [eventsData, setEventsData] = useState(MOCK_DATA);
+
   
   const {
     getTableProps,
@@ -244,9 +255,19 @@ const SortingTable = props => {
                 </Grid.Column>
             ))
         } </Grid>    
-        </Card.Group>    
-
-      
+        </Card.Group> 
+        <div id="calenderView" style={{display:"none"}}>   
+        <Calendar className='table-container' 
+        views={["month"]}
+        // selectable
+        localizer={localizer}
+        defaultDate={new Date()}
+        defaultView="month"
+        events={eventsData}
+        style={{ height:"640px",overflow:"scroll",overflowX:"hidden" }}
+        
+      />
+      </div>
     </div>
     <div className='col-lg-4'><Right />
       </div>

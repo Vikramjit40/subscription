@@ -68,26 +68,38 @@ export const colorDatalen=(value)=>{
     }
 }
 const menuItems=[
-    {id:1,label:"Home",icon:"/home.png",link:"/"},
-    {id:2,label:"Duration",icon:"/clock.png",link:"/duration"},
-    {id:3,label:"People",icon:"/user.png",link:"/people"},
-    {id:4,label:"Bank",icon:"/bank.png",link:"/bank"},
-    {id:5,label:"Setting",icon:"/settings.png",link:"/setting"},
+    {id:1,label:"Subscriptions",icon:"/home.svg",link:"/"},
+    {id:2,label:"Reports",icon:"/clock.svg",link:"/duration"},
+    {id:3,label:"Team",icon:"/user.svg",link:"/people"},
+    {id:4,label:"Linked Accounts(Soon)",icon:"/bank.svg",link:"/bank"},
+    {id:5,label:"Settings",icon:"/setting.svg",link:"/setting"},
 ];
 const Sidebar = () => {
     const [toggleCollapse,setToggleCollapse]=useState(false);
     const [isCollapsible,setIsCollapsible]=useState(false);
     const router = useRouter()
     const activeMenu=useMemo(()=> menuItems.find(menu=>menu.link===router.pathname ),[router.pathname] )
-    const wrapperClasses=classNames('h-screen px-4 pt-0 pb-4 bg-light flex justify-between flex-col',{['w-20']:!toggleCollapse,['w-40']:toggleCollapse})
+    const wrapperClasses=classNames('h-screen px-4 pt-0 pb-4 bg-light flex justify-between flex-col',{['w-20']:!toggleCollapse,['w-64']:toggleCollapse})
+    const logoClasses=classNames('items-center justify-between relative',{"block":!toggleCollapse,"flex":toggleCollapse})
+    const progressClass=classNames('hover:bg-[rgba(211,184,255,.5)] py-2 rounded-3 cursor-pointer w-full',{['text-center']:!toggleCollapse,[' text-center']:toggleCollapse})
+    const barClass=classNames("h-2 bg-[#edf2f7] rounded-4 hover:bg-white",{['w-19']:!toggleCollapse,['w-55 m-5']:toggleCollapse})
     const collapseIconClasses=classNames("rounded justify-between bg-light-lighter items-center") 
     const handleSidebarToggle=()=>{
         setToggleCollapse(!toggleCollapse)
     }
     const getNavItemClasses=(menu)=>{
-        return classNames("flex items-center mt-1 cursor-pointer hover:bg-light-lighter rounded overflow-hidden whitespace-nowrap",{
-            ["bg-light-lighter"]: activeMenu.id === menu.id
+        return classNames("flex items-center mt-1 cursor-pointer  rounded overflow-hidden whitespace-nowrap",{
+            ["bg-[rgba(0,0,0,0.80)]"]: activeMenu.id === menu.id,
+            ["hover:bg-hoverCol"]:activeMenu.id != menu.id,
         })
+    }
+    const getNavItemHoverClasses=(menu)=>{
+        return classNames("text-lg text-textColor marker:font-medium ",{
+            ["text-white"]: activeMenu.id === menu.id,
+        })
+    }
+    const getNavIconHoverClasses=(menu)=>{
+        return classNames("fill-white",{["fill-[rgba(0,0,0,0.80)]"]: activeMenu.id != menu.id,})
     }
     const onMouseOver=()=>{
         setIsCollapsible(!isCollapsible)
@@ -95,26 +107,34 @@ const Sidebar = () => {
     return (
     <div className={wrapperClasses} style={{transition:"width 300ms cubic-bezier(0.2,0,0,1)0s",top:"0",left:"0",}} onMouseEnter={onMouseOver} onMouseLeave={onMouseOver}>
       <div className='flex flex-col'>
-        <div className='flex items-center justify-between relative'>
-            <div className='flex items-center pl-0 pt-2 gap-4'>
-                <Image src="/logo1.svg" width={45} height={45} />            
-            </div>   
-        </div>
-        <div className='items-center pl-2 pt-4 cursor-pointer' onClick={handleSidebarToggle}>
+        <div className={logoClasses }>
+            
+                <Link href="/" className='flex items-center pl-0 pt-2'>
+                
+                <Image src="/logo1.svg" width={45} height={45} /> 
+                {toggleCollapse && (
+                                    <span style={{width:'1rem',fontSize:"22px",fontWeight:"bold",color:"rgb(0,0,0)"}} > Subly</span>
+                                )}         
+            </Link>
+               
+        <div className='items-center  mt-2 p-3 cursor-pointer hover:bg-hoverCol' onClick={handleSidebarToggle}>
             <Image src="/navigation.png" width={23} height={20}/>
+        </div>
         </div>
         <div className='flex flex-col items-start mt-5'>
             {menuItems.map(({icon:Icon, ...menu})=>{
                 const classes = getNavItemClasses(menu);
+                const hoverClass= getNavItemHoverClasses(menu);
+                const iconActive=getNavIconHoverClasses(menu);
                 return(
                     <div className={classes}>
-                        <Link href={menu.link} className='flex py-4 px-3 items-center w-full h-full'>
+                        <Link href={menu.link} className='flex py-4 px-2 items-center w-full h-full'>
                             
-                                <div style={{width:'1.4rem'}}>
-                                    <Image src={Icon} width={20} height={20} />
+                                <div style={{width:'2rem'}}>
+                                    <Image src={Icon} width={25} height={25} className={iconActive}  />
                                 </div>
                                 {toggleCollapse && (
-                                    <span style={{width:'5.5rem'}} className={classNames("text-md font-medium text-text-light")}>{menu.label}</span>
+                                    <span style={{width:'11.5rem',paddingLeft:"3px"}} className={hoverClass}> {menu.label}</span>
                                 )}
                         
                         </Link>
@@ -124,22 +144,30 @@ const Sidebar = () => {
         </div>
         
       </div>
-      <div className='flex flex-col items-start '>
-        <p><span id="len">{tbodyCount}</span>/{tbodyCount}</p>
-        <div style={{height: "5px",
-        width: "3rem",
-        backgroundColor: 'grey',
-        borderRadius: "40px",
-        margin: "5px"}}>
+      <div className='flex flex-col items-start'>
+        <div className={progressClass}>
+        <p style={{fontWeight:"bold"}}><span id="len">{tbodyCount}</span>/{tbodyCount}{toggleCollapse && (
+                                    <span style={{width:'1rem',color:"rgb(0,0,0)"}} > Subscription</span>
+                                )}    </p>
+        <div className={barClass} >
       <div id="app" style={{height: '100%',
         width: `100%`,
-        backgroundColor: "#A020F0",
+        backgroundColor: "rgb(211,184,255)",
        borderRadius:"40px",
         textAlign: 'right'}}>
       </div>
    </div>
-        <Link href="/"><Image src="/question.png" width={18} height={18} className='ml-3 mt-6' /></Link>
-        <Link href="/"><Image src="/exclamation.png" width={18} height={18}  className='mt-5 ml-3 mb-8' /></Link>
+   {toggleCollapse && (
+                                    <p style={{width:'15rem',color:"#6530b2"}} ><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" focusable="false" class="chakra-icon css-13otjrl" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M11.219 3.375 8 7.399 4.781 3.375A1.002 1.002 0 0 0 3 4v15c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2V4a1.002 1.002 0 0 0-1.781-.625L16 7.399l-3.219-4.024c-.381-.474-1.181-.474-1.562 0zM5 19v-2h14.001v2H5zm10.219-9.375c.381.475 1.182.475 1.563 0L19 6.851 19.001 15H5V6.851l2.219 2.774c.381.475 1.182.475 1.563 0L12 5.601l3.219 4.024z"></path></svg> Upgrade your plan</p>
+                                )}
+   </div>
+        <Link href="/" className='flex items-center w-full h-full hover:bg-hoverCol mt-4'><div><img src="/question.svg"  className='p-3 ' /></div>{toggleCollapse && (
+                                    <span style={{width:'11.5rem',paddingLeft:"3px",color:"rgba(0,0,0,0.64)"}} >Help</span>
+                                )}</Link>
+            
+        <Link href="/" className='flex items-center w-full h-full hover:bg-hoverCol mb-8 mt-2'><div><img src="/exclamation.svg"  className=' p-3' /></div>{toggleCollapse && (
+                                    <span style={{width:'11.5rem',paddingLeft:"3px",color:"rgba(0,0,0,0.64)"}} >What's New</span>
+                                )}</Link>
         </div>
     </div>
   )

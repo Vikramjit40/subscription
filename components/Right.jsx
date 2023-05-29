@@ -2,7 +2,7 @@ import React, { useEffect,useState } from 'react'
 import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
 import MOCK_DATA from '../public/MOCK_DATA.json';
-import { blockView,listView } from './DataTable';
+import { blockView,listView,calanderView } from './DataTable';
 
 
 const Right = () => {
@@ -50,6 +50,7 @@ var inactiveStyle = {
         Object.assign(blockActive.style, inactiveStyle);
       }
       function calander(){
+        calanderView();
         Object.assign(listActive.style, inactiveStyle);
         Object.assign(blockActive.style, inactiveStyle);
         Object.assign(calanActive.style, activeStyle);

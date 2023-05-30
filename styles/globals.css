@@ -110,3 +110,35 @@ svg {display: inline;}
     color-scheme: dark;
   }
 }
+@media screen and (max-width: 1024px) {
+  /* .delete {
+    display: none;
+  } */
+  .view{margin-left: 0px !important;}
+  .med{
+    max-width:1040px
+  }
+}
+@media (max-width: 992px){
+  .delete {
+    display: none;
+  }
+}
+@media (max-width: 991px){
+  .fil{display: none;}
+  .filt{width:75%}
+  .proj{width:20%}
+}
+@media (max-width: 790px){
+  .filt{width:75%}
+  .proj{width:25%}
+}
+@media (max-width: 768px){
+  .filt{width:70%}
+  .proj{width:30%}
+}
+@media (max-width: 566px){
+  .filt{width:60%}
+  .proj{width:40%}
+}
+

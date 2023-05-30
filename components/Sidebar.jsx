@@ -4,19 +4,22 @@ import Image from 'next/image'
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import MOCK_DATA from '@/public/MOCK_DATA.json';
+import { UncontrolledTooltip } from 'reactstrap';
 const tbodyCount=MOCK_DATA.length;
 
 export const activeDatalen=(active)=>{
     if(active){
         const asd=MOCK_DATA.filter(function (el) {
-            return el.active == true})
+            return el.active == false})
     return (document.getElementById("len").innerHTML=asd.length,
     document.getElementById("app").style.width=((asd.length/MOCK_DATA.length)*100) +"%"
     )
 }
 else{
-    return (document.getElementById("len").innerHTML=MOCK_DATA.length,
-    document.getElementById("app").style.width=((MOCK_DATA.length/MOCK_DATA.length)*100) +"%")
+    const act=MOCK_DATA.filter(function (el) {
+        return el.active == true})
+    return (document.getElementById("len").innerHTML=act.length,
+    document.getElementById("app").style.width=((act.length/MOCK_DATA.length)*100) +"%")
 }
 }
 export const catDatalen=(value)=>{
@@ -99,7 +102,7 @@ const Sidebar = () => {
         })
     }
     const getNavIconHoverClasses=(menu)=>{
-        return classNames("fill-white",{["fill-[rgba(0,0,0,0.80)]"]: activeMenu.id != menu.id,})
+        return classNames({["filter invert "]: activeMenu.id === menu.id,})
     }
     const onMouseOver=()=>{
         setIsCollapsible(!isCollapsible)
@@ -122,22 +125,26 @@ const Sidebar = () => {
         </div>
         </div>
         <div className='flex flex-col items-start mt-5'>
-            {menuItems.map(({icon:Icon, ...menu})=>{
+            {menuItems.map(({icon:Icon, ...menu},index)=>{
                 const classes = getNavItemClasses(menu);
                 const hoverClass= getNavItemHoverClasses(menu);
                 const iconActive=getNavIconHoverClasses(menu);
+            
                 return(
                     <div className={classes}>
-                        <Link href={menu.link} className='flex py-4 px-2 items-center w-full h-full'>
-                            
+                        <Link href={menu.link} className='flex py-4 px-2 items-center w-full h-full' data-placement="right" id={"index"+index}>
+                        
                                 <div style={{width:'2rem'}}>
                                     <Image src={Icon} width={25} height={25} className={iconActive}  />
                                 </div>
                                 {toggleCollapse && (
                                     <span style={{width:'11.5rem',paddingLeft:"3px"}} className={hoverClass}> {menu.label}</span>
                                 )}
-                        
-                        </Link>
+                                               </Link>
+                                               {!toggleCollapse && <UncontrolledTooltip 
+        placement="right"
+        target={"index"+index}
+      >{menu.label}</UncontrolledTooltip>}
                     </div>
                 )
             })}
@@ -152,7 +159,7 @@ const Sidebar = () => {
         <div className={barClass} >
       <div id="app" style={{height: '100%',
         width: `100%`,
-        backgroundColor: "rgb(211,184,255)",
+        backgroundColor: "#8a56df",
        borderRadius:"40px",
         textAlign: 'right'}}>
       </div>
@@ -161,13 +168,19 @@ const Sidebar = () => {
                                     <p style={{width:'15rem',color:"#6530b2"}} ><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" focusable="false" class="chakra-icon css-13otjrl" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M11.219 3.375 8 7.399 4.781 3.375A1.002 1.002 0 0 0 3 4v15c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2V4a1.002 1.002 0 0 0-1.781-.625L16 7.399l-3.219-4.024c-.381-.474-1.181-.474-1.562 0zM5 19v-2h14.001v2H5zm10.219-9.375c.381.475 1.182.475 1.563 0L19 6.851 19.001 15H5V6.851l2.219 2.774c.381.475 1.182.475 1.563 0L12 5.601l3.219 4.024z"></path></svg> Upgrade your plan</p>
                                 )}
    </div>
-        <Link href="/" className='flex items-center w-full h-full hover:bg-hoverCol mt-4'><div><img src="/question.svg"  className='p-3 ' /></div>{toggleCollapse && (
+        <Link href="/" id="help" data-placement="right" className='flex items-center w-full h-full hover:bg-hoverCol mt-4'><div><img src="/question.svg"  className='p-3 ' /></div>{toggleCollapse && (
                                     <span style={{width:'11.5rem',paddingLeft:"3px",color:"rgba(0,0,0,0.64)"}} >Help</span>
-                                )}</Link>
+                                )}</Link>{!toggleCollapse && <UncontrolledTooltip 
+                                    placement="right"
+                                    target={"help"}
+                                  >Help</UncontrolledTooltip>}
             
-        <Link href="/" className='flex items-center w-full h-full hover:bg-hoverCol mb-8 mt-2'><div><img src="/exclamation.svg"  className=' p-3' /></div>{toggleCollapse && (
+        <Link href="/" id="what" data-placement="right" className='flex items-center w-full h-full hover:bg-hoverCol mb-8 mt-2'><div><img src="/exclamation.svg"  className=' p-3' /></div>{toggleCollapse && (
                                     <span style={{width:'11.5rem',paddingLeft:"3px",color:"rgba(0,0,0,0.64)"}} >What's New</span>
-                                )}</Link>
+                                )}</Link>{!toggleCollapse && <UncontrolledTooltip 
+                                    placement="right"
+                                    target={"what"}
+                                  >What's New</UncontrolledTooltip>}
         </div>
     </div>
   )

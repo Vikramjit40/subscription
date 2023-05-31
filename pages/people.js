@@ -3,7 +3,7 @@ import Layout from '@/components/Layout'
 const people = () => {
   return (
     <Layout>
-      People
+     Team
     </Layout>
   )
 }

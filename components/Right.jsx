@@ -22,7 +22,7 @@ const Right = () => {
   return (
     <div className='container' style={{backgroundColor:"#f7fafc",padding:"0"}}>
         
-        <div className='row bg-white mt-4 mr-2 rounded-md'>
+        <div className='row bg-white mt-4 mr-2 rounded-lg h-52' style={{boxShadow:"rgba(0, 0, 0, 0.05) 0px 4px 6px -1px" }}>
             <div className='row'>
             <div className='col-lg-11 col-sm-11 col-11 py-3 flex'>
             <p className='font-bold'><i className='fas fa-redo-alt'/> Recurring expenses</p>
@@ -36,7 +36,7 @@ const Right = () => {
         
         <div className='row'><div className='col text-center p-5'><p>$ {avg} Monthly</p></div></div>
     </div>
-    <div className='row bg-white mt-4 mr-2 rounded-md'>
+    <div className='row bg-white mt-4 mr-2 rounded-lg h-52'style={{boxShadow:"rgba(0, 0, 0, 0.05) 0px 4px 6px -1px" }}>
             <div className='row'>
             <div className='col-lg-11 py-3'>
             <p className='font-bold'>Previous Month Comparison</p>

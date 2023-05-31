@@ -13,7 +13,7 @@ const GlobalFilter = ({ filter, setFilter }) => {
 
   return (
     <span>
-      <input className={`${styles.search} cursor-pointer`} style={{width:"110px",borderRadius:"5px",padding:"8px 0px",fontSize:"13px"}} 
+      <input className={`${styles.search} cursor-pointer `} style={{width:"110px",borderRadius:"5px",padding:"8px 0px",fontSize:"13px"}} 
         type="text"
         value={value || ''} placeholder=" &#61442; Search"
         onChange={e => {

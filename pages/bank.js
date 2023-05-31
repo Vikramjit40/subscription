@@ -3,7 +3,7 @@ import Layout from '@/components/Layout'
 const bank = () => {
   return (
     <Layout>
-      Bank
+      Linked Account
     </Layout>
   )
 }

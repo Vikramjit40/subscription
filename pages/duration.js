@@ -3,7 +3,7 @@ import Layout from '@/components/Layout'
 const duration = () => {
   return (
     <Layout>
-      Duration
+      Report
     </Layout>
   )
 }

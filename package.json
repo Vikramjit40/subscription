@@ -25,7 +25,8 @@
     "react-table": "^7.8.0",
     "reactstrap": "^9.1.10",
     "semantic-ui-css": "^2.5.0",
-    "semantic-ui-react": "^2.1.4"
+    "semantic-ui-react": "^2.1.4",
+    "tw-elements": "^1.0.0-beta2"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",

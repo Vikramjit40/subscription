@@ -12,34 +12,34 @@ const Right = () => {
     return el.active == true && el.period=="One time"})
 
     const sumonetime = recone.reduce((accumulator, object) => {
-      return accumulator + parseInt(object.cost);
+      return accumulator + Number(object.cost);
     }, 0);
 
   const rec1Mon=MOCK_DATA.filter(function (el) {
     return el.active == true && el.period=="1 month"})
 
     const sum1Mon = rec1Mon.reduce((accumulator, object) => {
-      return accumulator + parseInt(object.cost*12);
+      return accumulator + Number(object.cost*12);
     }, 0);
 
     const rec2Mon=MOCK_DATA.filter(function (el) {
       return el.active == true && el.period=="2 month"})
   
       const sum2Mon = rec2Mon.reduce((accumulator, object) => {
-        return accumulator + parseInt(object.cost*6);
+        return accumulator + Number(object.cost*6);
       }, 0);
 
       const rec6Mon=MOCK_DATA.filter(function (el) {
         return el.active == true && el.period=="6 month"})
     
         const sum6Mon = rec6Mon.reduce((accumulator, object) => {
-          return accumulator + parseInt(object.cost*2);
+          return accumulator + Number(object.cost*2);
         }, 0);
         const rec1Yea=MOCK_DATA.filter(function (el) {
           return el.active == true && el.period=="1 year"})
       
           const sum1Yea = rec1Yea.reduce((accumulator, object) => {
-            return accumulator + parseInt(object.cost);
+            return accumulator + Number(object.cost);
           }, 0);
     const avgMon=((sum1Mon+sum2Mon+sum6Mon+sum1Yea)/12).toFixed(2)
 const yearly=(sum1Mon+sum2Mon+sum6Mon+sum1Yea).toFixed(2)

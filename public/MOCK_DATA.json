@@ -62,7 +62,7 @@
   {
     "id": 6,
     "first_name": "ViSPR SEO Network",
-    "active": false,
+    "active": true,
     "payment_method": "Invoice",
     "date_of_birth": "1990-11-19T00:58:32Z",
     "period": "1 month",

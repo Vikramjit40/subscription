@@ -217,36 +217,40 @@ const Sidebar = () => {
             <Modal isOpen={modal} toggle={toggle} centered>
                 <ModalHeader style={{backgroundColor:"#f7fafc"}} toggle={toggle}><h3>Help</h3></ModalHeader>
                 <ModalBody style={{backgroundColor:"#f7fafc"}}>
-                    <a id="antitouch" href="https://help.subly.app/" target="_blank" className='p-5 mt-3 w-5/6 mx-auto rounded-lg cursor-pointer' style={{display:"flex", boxShadow:"0 1px 3px 0 rgba(0, 0, 0, 0.1),0 1px 2px 0 rgba(0, 0, 0, 0.06"}}>
+                    <div id="antitouch">
+                    <a  href="https://help.subly.app/" target="_blank" className='p-5 mt-3 w-5/6 mx-auto rounded-lg cursor-pointer' style={{display:"flex", boxShadow:"0 1px 3px 0 rgba(0, 0, 0, 0.1),0 1px 2px 0 rgba(0, 0, 0, 0.06"}}>
                     <div style={{height:"45px",marginTop:"10px",backgroundColor:"#add8fc",padding:"8px",borderRadius:"6px"}}><svg stroke="currentColor" fill="#0d4a7d" stroke-width="0" viewBox="0 0 24 24" focusable="false"  height="2em" width="2em" xmlns="http://www.w3.org/2000/svg"><path d="M6 22h15v-2H6.012C5.55 19.988 5 19.805 5 19s.55-.988 1.012-1H21V4c0-1.103-.897-2-2-2H6c-1.206 0-3 .799-3 3v14c0 2.201 1.794 3 3 3zM5 8V5c0-.805.55-.988 1-1h13v12H5V8z"></path><path d="M8 6h9v2H8z"></path></svg></div>
                     <div className='ml-4'><h4 style={{color:"black"}}>Knowledge based</h4>
                     <p style={{marginTop:"-10px",fontSize:"15px",color:"rgba(0,0,0,0.64)"}}>Find answers to your questions in our help center</p></div>
                     </a>
-                    <a id="antitouch" href="https://roadmap.subly.app" target="_blank" className='p-5 mt-3 w-5/6 mx-auto rounded-lg cursor-pointer' style={{display:"flex", boxShadow:"0 1px 3px 0 rgba(0, 0, 0, 0.1),0 1px 2px 0 rgba(0, 0, 0, 0.06"}}>
+                    <a  href="https://roadmap.subly.app" target="_blank" className='p-5 mt-3 w-5/6 mx-auto rounded-lg cursor-pointer' style={{display:"flex", boxShadow:"0 1px 3px 0 rgba(0, 0, 0, 0.1),0 1px 2px 0 rgba(0, 0, 0, 0.06"}}>
                     <div style={{height:"45px",marginTop:"10px",backgroundColor:"#fefcbf",padding:"8px",borderRadius:"6px"}}><svg stroke="currentColor" fill="#744210" stroke-width="0" viewBox="0 0 24 24" focusable="false"  height="2em" width="2em" xmlns="http://www.w3.org/2000/svg"><path d="M9 20h6v2H9zm7.906-6.288C17.936 12.506 19 11.259 19 9c0-3.859-3.141-7-7-7S5 5.141 5 9c0 2.285 1.067 3.528 2.101 4.73.358.418.729.851 1.084 1.349.144.206.38.996.591 1.921H8v2h8v-2h-.774c.213-.927.45-1.719.593-1.925.352-.503.726-.94 1.087-1.363zm-2.724.213c-.434.617-.796 2.075-1.006 3.075h-2.351c-.209-1.002-.572-2.463-1.011-3.08a20.502 20.502 0 0 0-1.196-1.492C7.644 11.294 7 10.544 7 9c0-2.757 2.243-5 5-5s5 2.243 5 5c0 1.521-.643 2.274-1.615 3.413-.373.438-.796.933-1.203 1.512z"></path></svg></div>
                     <div className='ml-4'><h4 style={{color:"black"}}>Knowledge based</h4>
                     <p style={{marginTop:"-10px",fontSize:"15px",color:"rgba(0,0,0,0.64)"}}>Find answers to your questions in our help center</p></div>
                     </a>
-                    <div onClick={touch} id="antitouch" className='p-5 mt-3 w-5/6 mx-auto mb-5 rounded-lg cursor-pointer' style={{display:"flex", boxShadow:"0 1px 3px 0 rgba(0, 0, 0, 0.1),0 1px 2px 0 rgba(0, 0, 0, 0.06"}}>
+                    <div onClick={touch}  className='p-5 mt-3 w-5/6 mx-auto mb-5 rounded-lg cursor-pointer' style={{display:"flex", boxShadow:"0 1px 3px 0 rgba(0, 0, 0, 0.1),0 1px 2px 0 rgba(0, 0, 0, 0.06"}}>
                     <div style={{height:"45px",marginTop:"10px",backgroundColor:"#e7dbfd",padding:"8px",borderRadius:"6px"}}><svg stroke="currentColor" fill="#532394" stroke-width="0" viewBox="0 0 24 24" focusable="false"  height="2em" width="2em" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2zm0 2v.511l-8 6.223-8-6.222V6h16zM4 18V9.044l7.386 5.745a.994.994 0 0 0 1.228 0L20 9.044 20.002 18H4z"></path></svg></div>
                     <div className='ml-4'><h4 style={{color:"black"}}>Knowledge based</h4>
                     <p style={{marginTop:"-10px",fontSize:"15px",color:"rgba(0,0,0,0.64)"}}>Find answers to your questions in our help center</p></div>
                     </div>
-                    <div id='touch' style={{display:"none", paddingLeft:"25px"}}>
-                        <h4>Get in touch</h4>
-                        <p>Message<span style={{color:"red"}}> *</span></p>
+                    </div>
+                    <div id='touch' style={{display:"none",paddingBottom:"13px", paddingLeft:"25px"}}>
+                        <h3>Get in touch</h3>
+                        <p style={{fontSize:"15px"}}>Message<span style={{color:"red"}}> *</span></p>
                         <form action="">
-                            <textarea name="" id="" cols="45" rows="5" placeholder='Your feedback' style={{padding:"15px"}}></textarea>
+                            <textarea name="" id="" required="true" cols="45" rows="3" placeholder='Your feedback' style={{padding:"15px"}}></textarea>
                             <br/>
                             <br/>
 
-                            <input type="radio" id="html" name="fav_language" value="HTML" ></input>
-                            <label for="html">HTML</label>
-                            <input type="radio" id="css" name="fav_language" value="CSS" ></input>
-                            <label for="css">CSS</label>
-                            <input type="radio" id="javascript" name="fav_language" value="JavaScript" ></input>
-                            <label for="javascript">JavaScript</label>
-                                    <button type='submit' className='btn btn-primary' style={{float:"right",marginRight:"30px",color:"white"}}>Send</button>
+                            <input style={{height:"18px",width:"22px"}} type="radio" id="angry" name="feedback" value="angry" ></input>
+                            <label style={{fontSize:"24px",marginRight:"8px"}} for="angry">😤</label>
+                            <input style={{height:"18px",width:"22px"}} type="radio" id="emotionless" name="feedback" value="emotionless" ></input>
+                            <label style={{fontSize:"24px",marginRight:"8px"}} for="emotionless">😐</label>
+                            <input style={{height:"18px",width:"22px"}} type="radio" id="happy" name="feedback" value="happy" ></input>
+                            <label style={{fontSize:"24px",marginRight:"8px"}} for="happy">😃</label>
+                            <input style={{height:"18px",width:"22px"}} type="radio" id="veryhappy" name="feedback" value="veryhappy" ></input>
+                            <label style={{fontSize:"24px"}} for="veryhappy">😍</label>
+                                    <button type='submit' className='btn btn-primary' style={{float:"right",marginRight:"30px",color:"white",marginTop:"-8px"}}>Send</button>
                         </form>
                     </div>
                 </ModalBody>

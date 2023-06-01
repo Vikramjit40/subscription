@@ -8,25 +8,39 @@ import MOCK_DATA from '../public/MOCK_DATA.json';
 import { activeDatalen,catDatalen,payDatalen,periodDatalen,colorDatalen } from './Sidebar';
 import Image from 'next/image';
 import Right from './Right';
-import{Modal,ModalBody} from 'reactstrap';
+import{Modal,ModalBody,ModalHeader} from 'reactstrap';
 import { Card, Grid} from "semantic-ui-react";
-
+import { UncontrolledTooltip } from 'reactstrap';
 moment.locale("en");
   const localizer= momentLocalizer(moment)
   
 const SortingTable = props => {
-  const [mockData,setMockData]=useState(MOCK_DATA)
+  const [mockData,setMockData]=useState(MOCK_DATA.filter(function (el) {
+    return el.active == true 
+  }))
   const columns = useMemo(() => COLUMNS, []);
   const data = mockData;
   const [active,setActive]=useState(true);
   const [eventsData, setEventsData] = useState(MOCK_DATA);
-  const [modal,setModal]=useState(false);
-  const toggle=()=>setModal(!modal);
+  const [modal1,setModal1]=useState(false);
+  const [modal2,setModal2]=useState(false);
+  const toggle1=()=>setModal1(!modal1);
+  const toggle2=()=>setModal2(!modal2);
   useEffect(() => {
     document.onkeyup = function(e) {
     if (e.ctrlKey && e.which == 66) {
-      setModal(!modal)}
-}});
+      setModal1(!modal1)}
+}
+// window.onload = function(){
+//   var hideMe = document.getElementById('hideMe');
+//   document.onclick = function(e){
+//      if(e.target.id !== 'hideMe'){
+//         hideMe.style.display = 'none';
+//      }
+//   };
+// }
+;
+});
   const {
     getTableProps,
     getTableBodyProps,
@@ -167,7 +181,7 @@ function calanderView(){
     Object.assign(document.getElementById("bloc").style, inactiveStyle);
     Object.assign(document.getElementById("calan").style, activeStyle);
   }
- 
+  
   return (
     <>
     <div className='row mt-2'>
@@ -177,9 +191,9 @@ function calanderView(){
       <div className='col-xl-5 col-lg-9 col-sm-8 pt-1 ' >
         <div className=' flex gap-x-3 ml-12 newSub'>
             <div className='fontsi' style={{textAlign:"left"}}>
-            <button onClick={toggle} className='focus' style={{fontSize:"15px",padding:"8px 10px",display:"flex",backgroundColor:"#edf2f7"}}><div style={{display:"flex"}}><svg  stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" focusable="false" class="chakra-icon css-lgbjuw" height="1.5em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"></path></svg><p className='ml-1'>Search</p></div><div className='ml-3 mt-1'style={{fontSize:"11px"}}><kbd>Ctrl</kbd><kbd className=" ml-1 ">b</kbd></div></button>
+            <button id="fillters" onClick={toggle1} className='focus' style={{fontSize:"15px",padding:"4px 10px",display:"flex",backgroundColor:"#edf2f7"}}><div style={{display:"flex"}}><svg  stroke="currentColor" fill="#718096" stroke-width="0" viewBox="0 0 24 24" focusable="false" class="chakra-icon css-lgbjuw" height="2em" width="1.5em" xmlns="http://www.w3.org/2000/svg"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"></path></svg><p className='ml-1 mt-1 ' style={{color:"rgba(0,0,0,0.64)"}}>Search</p></div><div className='ml-3 mt-2'style={{fontSize:"11px"}}><kbd>Ctrl</kbd><kbd className=" ml-1 ">b</kbd></div></button>
             </div>
-            <Modal style={{overflow:"hidden",borderRadius:"15px",border:"2px solid rgba(65,153,225,0.6)"}} isOpen={modal} fade={true} toggle={toggle} className='mod ' >
+            <Modal style={{overflow:"hidden",borderRadius:"10px",zIndex:"1",borderColor: "rgb(19,128,228)",boxShadow: "rgb(19,128,228) 0px 0px 0px 1px",outline: "0"}} isOpen={modal1} fade={true} toggle={toggle1} className='mod ' >
               <ModalBody ><div style={{display:"flex"}}><div className='mt-2'><svg  stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" focusable="false" class="chakra-icon css-lgbjuw" height="2em" width="1.5em" xmlns="http://www.w3.org/2000/svg"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"></path></svg></div><input className='focus' style={{width:"100%",padding:"8px 10px",fontSize:"20px"}} type='text' placeholder='Search by name, category or tags'></input></div></ModalBody>
             </Modal>
             
@@ -188,10 +202,22 @@ function calanderView(){
 
 
             <div className='fontsi' style={{textAlign:"left"}}>
-                <button className=" hover:bg-[black] focus" style={{fontSize:"15px",color:"white",backgroundColor:"rgba(0,0,0,0.8)",borderRadius:"5px",padding:"10px 12px",width:"12rem"}}>+ New Subscription</button>
+                <button onClick={toggle2} className=" hover:bg-[black] focus" style={{fontSize:"15px",color:"white",backgroundColor:"rgba(0,0,0,0.8)",borderRadius:"5px",padding:"10px 12px",width:"12rem"}}>+ New Subscription</button>
             </div>
-            <div className=' cursor-pointer'style={{textAlign:"left"}}>     
-                <select style={{backgroundColor:"#ffffff",padding:"8px 4px",borderRadius:"5px",border:"1px solid black",fontSize:"15px" }}>
+            <Modal style={{overflow:"hidden",borderRadius:"12px",border:"none",zIndex:"1"}} isOpen={modal2} fade={false} toggle={toggle2}  >
+            <ModalHeader style={{backgroundColor:"#f7fafc"}} toggle={toggle2}><h3 style={{marginLeft:"165px",padding:"10px 0px"}}>Add Subscriptions</h3></ModalHeader>
+                <ModalBody style={{backgroundColor:"#f7fafc"}}>
+                    <input id="servicesearch" style={{fontSize:"18px",padding:"10px 5px",width:"100%",color:"black"}} type="text" placeholder='Search for a service'></input>
+                    <div id="searchforservice" className='text-center mt-2 p-12 '>
+                      <svg className='mb-5 mt-11' stroke="currentColor" fill="#718096" stroke-width="0" viewBox="0 0 24 24" focusable="false" class="chakra-icon css-ag9myg" height="3.5em" width="3.5em" xmlns="http://www.w3.org/2000/svg"><path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"></path><path d="M11.412 8.586c.379.38.588.882.588 1.414h2a3.977 3.977 0 0 0-1.174-2.828c-1.514-1.512-4.139-1.512-5.652 0l1.412 1.416c.76-.758 2.07-.756 2.826-.002z"></path></svg>
+                      <p style={{color:"rgba(0,0,0,0.64)",fontSize:"16px"}}>Search for a service or add one from scratch</p>
+                    <p style={{fontSize:"16px"}}>Have a CSV file <a href="/">Upload it here</a></p>
+                    </div>
+                    <button style={{backgroundColor:"rgba(0,0,0,0.80)",borderRadius:"8px",border:"none", color:"white", width:"100%",padding:"12px 0px",fontSize:"18px"}}>Add from scratch</button>
+                </ModalBody>
+            </Modal>
+            <div style={{textAlign:"left"}}>     
+                <select  id="fillters" style={{cursor:"pointer", backgroundColor:"#ffffff",padding:"8px 4px",borderRadius:"5px",border:"1px solid black",fontSize:"15px",color:"#1a202c" }}>
                     <option value="allProjects">All Projects</option>
                     <option value="openProjects">Personal</option>
                     <option value="closedProjects">Create Project</option>
@@ -213,31 +239,31 @@ function calanderView(){
             <div className='row'>
     <div className=' flex '>
     <p className='mt-2 fil'>Filter: </p>
-    <button onClick={() => { activeUser()}} className={active==true ? 'bg-#edf2f7 px-2 h-9 ml-2 text-center border border-slate-400 rounded-md cursor-pointer focus:outline-0' : 'focus:outline-0  cursor-pointer px-2 h-9 ml-2 text-center border border-slate-400 rounded-md '}style={{backgroundColor:active==true ? "#edf2f7" : "#F3F4F6"}}><i className="fa fa-circle" style={{fontSize:"10px",color:active==true ?"green":"grey"}} /> {active==true ?"Active":"Inactive"}   <i className="fa fa-random"></i></button>
-    <select onChange={category} className='fil w-21 h-9 ml-2 text-center border border-slate-400 rounded-md bg-#edf2f7 focus:outline-0'>
+    <button id="fillters" onClick={() => { activeUser()}} className={active==true ? ' px-2 h-9 ml-2 text-center border border-slate-400 rounded-md cursor-pointer focus:outline-0' : 'focus:outline-0  cursor-pointer px-2 h-9 ml-2 text-center border border-slate-400 rounded-md '}style={{backgroundColor:active==true ? "#edf2f7" : "#F3F4F6",color:"#1a202c"}}><i className="fa fa-circle" style={{fontSize:"10px",color:active==true ?"green":"grey"}} /> {active==true ?"Active":"Inactive"}   <i className="fa fa-random"></i></button>
+    <select onChange={category} id="fillters" className='cursor-pointer fil w-21 h-9 ml-2 text-center border border-slate-400 rounded-md bg-#edf2f7 focus:outline-0'>
       <option value="allProjects">Category</option>
-      <option value="API Dev">API Dev</option>
-      <option value="CMS">CMS</option>
-      <option value="Communication">Communication</option>
+      <option value="Recruiting">Recruiting</option>
+      <option value="Hosting">Hosting</option>
+      <option value="Accounting">Accounting</option>
       <option value="Design">Design</option>      
-      <option value="Education">Education</option>
-      <option value="Entertainment">Entertainment</option>
+      <option value="Marketing">Marketing</option>
+      <option value="Video Streaming">Video Streaming</option>
     </select>
-    <select onChange={period} className='fil w-20 h-9 ml-2 text-center border border-slate-400 rounded-md bg-#edf2f7 focus:outline-0'>
+    <select onChange={period} id="fillters" className='cursor-pointer fil w-20 h-9 ml-2 text-center border border-slate-400 rounded-md bg-#edf2f7 focus:outline-0'>
       <option value="allProjects">Period</option>
       <option value="1 month">1 month</option>
-      <option value="30 days">30 days</option>
+      <option value="2 month">2 month</option>
       <option value="6 month">6 month</option>
       <option value="1 year">1 year</option>
       <option value="One time">One time</option>
     </select>
-    <select onChange={payment} className='fil h-9 text-center ml-2 border border-slate-400 rounded-md bg-#edf2f7 focus:outline-0'>
+    <select onChange={payment} id="fillters" className='cursor-pointer fil h-9 text-center ml-2 border border-slate-400 rounded-md bg-#edf2f7 focus:outline-0'>
       <option value="allProjects">Payment Method</option>
       <option value="Debit">Debit</option>
       <option value="Credit">Credit</option>
       <option value="Invoice">Invoice</option>
     </select>
-    <select onChange={colorChange} className='fil w-20 h-9 text-center ml-2 border border-slate-400 rounded-md bg-#edf2f7 focus:outline-0'>
+    <select onChange={colorChange} id="fillters" className='cursor-pointer fil w-20 h-9 text-center ml-2 border border-slate-400 rounded-md bg-#edf2f7 focus:outline-0'>
       <option value="allProjects">Color</option>
       <option value="rgba(255, 0, 0, 0.4)">Red</option>
       <option value="rgba(60, 179, 113,0.8)">Green</option>
@@ -245,7 +271,7 @@ function calanderView(){
       <option value="rgba(240, 240, 240,0.4)">White</option>
       <option value="rgba(0, 0, 255, 0.4)">Blue</option>
     </select>
-    <select className='fil w-20 h-9 ml-2 text-center border border-slate-400 rounded-md bg-#edf2f7 focus:outline-0'>
+    <select id="fillters" className='cursor-pointer fil w-20 h-9 ml-2 text-center border border-slate-400 rounded-md bg-#edf2f7 focus:outline-0'>
       <option value="allProjects">Tags</option>
       <option value="openProjects">Open Projects</option>
       <option value="closedProjects">Closed Projects</option>
@@ -257,9 +283,21 @@ function calanderView(){
               <div className='row '>
               <div className='col-xl-7 col-lg-5 delete'></div>
               <div className='col-xl-5 col-lg-7 flex flex-row'><span ><p className='view ml-6 mt-1'>View</p></span> 
-              <button onClick={block} id="bloc" style={{border:"1px solid rgba(0,0,0,0.08)",borderRadius:"3px",backgroundColor:"#edf2f7"}} className=' ml-2 p-1 w-8 h-8 cursor-pointer	focus:outline-0'><Image src={"/square.png"} width={15} height={14}  /></button>
+              <button onClick={block} id="bloc" data-placement="bottom" style={{border:"1px solid rgba(0,0,0,0.08)",borderRadius:"3px",backgroundColor:"#edf2f7"}} className=' ml-2 p-1 w-8 h-8 cursor-pointer	focus:outline-0'><Image src={"/square.png"} width={15} height={14}  /></button>
+              <UncontrolledTooltip 
+                                    placement="bottom"
+                                    target="bloc"
+                                  >Grid</UncontrolledTooltip>
               <button onClick={list} id="lis" style={{border:"1px solid rgba(0,0,0,0.08)",borderRadius:"3px",backgroundColor:"#cbd5e0"}} className='ml-2 p-1 w-8 h-8 cursor-pointer focus:outline-0'><Image src={"/list.png"} width={16} height={16} /> </button>
+              <UncontrolledTooltip 
+                                    placement="bottom"
+                                    target="lis"
+                                  >Table</UncontrolledTooltip>
               <button onClick={calander} id="calan" style={{border:"1px solid rgba(0,0,0,0.08)",borderRadius:"3px",backgroundColor:"#edf2f7"}} className=' ml-2 p-1 w-8 h-8 cursor-pointer	focus:outline-0'><Image src={"/calander.png"} width={16} height={15} /> </button>
+              <UncontrolledTooltip 
+                                    placement="bottom"
+                                    target="calan"
+                                  >Calander (Beta)</UncontrolledTooltip>
               </div>
               </div>
             </div>

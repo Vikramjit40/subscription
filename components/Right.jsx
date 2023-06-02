@@ -87,7 +87,7 @@ const yearly=(sum1Mon+sum2Mon+sum6Mon+sum1Yea).toFixed(2)
   return (
     <div className='container' style={{backgroundColor:"#f7fafc",padding:"0"}}>
         
-        <div className='row bg-white mt-4 mr-2 rounded-lg h-48' style={{boxShadow:"rgba(0, 0, 0, 0.05) 0px 4px 6px -1px" }}>
+        <div className='row bg-white mt-4 mr-1 rounded-lg h-48' style={{boxShadow:"rgba(0, 0, 0, 0.05) 0px 4px 6px -1px" }}>
             <div className='row'>
             <div className='col-lg-11 col-sm-11 col-11 py-3 mt-4 flex'>
             <p style={{fontSize:"18px"}} className='font-bold'><i className='fas fa-redo-alt'/> Recurring expenses</p>

@@ -1,15 +1,16 @@
 import React from 'react'
 import Sidebar from './Sidebar'
-import Right from './Right'
+import Bottombar from './Bottombar'
+
 const Layout = ({children}) => {
   return (
     <div className='h-screen flex flex-row justify-start '> 
       <Sidebar />
       <div className=' bg-backcolor flex-1 pt-4 '>
         {children}
-
+        <Bottombar />
       </div>
-  
+
     </div>
    
   )

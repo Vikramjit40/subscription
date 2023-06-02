@@ -34,7 +34,7 @@ export const COLUMNS = [
   },
   {
     Header: 'Next Payment',
-    accessor: 'date_of_birth',
+    accessor: 'next_payment',
     Cell: ({ value }) => {
       return format(new Date(value), 'dd/MM/yyyy');
     }

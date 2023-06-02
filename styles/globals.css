@@ -129,11 +129,11 @@ outline: 0;
 #fillters:hover{
   background-color: #e2e8f0 !important;
 }
-a {
+#upload {
   color: #1380E4;
   font-weight: bold;
 }
-a:hover{
+#upload:hover{
 text-decoration: underline !important;
 }
 svg {display: inline;}
@@ -185,10 +185,11 @@ svg {display: inline;}
   .filt{width:60%}
   .proj{width:40%}
 }
-@media (max-width: 890px){
+@media only screen and (max-width: 890px){
   .fontsi{display: none;}
   .newSub{float:right}
   .sideBar{display: none !important;}
+  .bottomBar{display:block !important}
   .mod{display: none !important;}
 }
 @media (max-width: 574px){

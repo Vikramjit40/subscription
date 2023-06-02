@@ -8,9 +8,11 @@ import MOCK_DATA from '../public/MOCK_DATA.json';
 import { activeDatalen,catDatalen,payDatalen,periodDatalen,colorDatalen } from './Sidebar';
 import Image from 'next/image';
 import Right from './Right';
-import{Modal,ModalBody,ModalHeader} from 'reactstrap';
+import{Modal,ModalBody,ModalHeader,Dropdown,DropdownItem,DropdownToggle,DropdownMenu} from 'reactstrap';
 import { Card, Grid} from "semantic-ui-react";
 import { UncontrolledTooltip } from 'reactstrap';
+import { format } from 'date-fns';
+
 moment.locale("en");
   const localizer= momentLocalizer(moment)
   
@@ -24,42 +26,40 @@ const SortingTable = props => {
   const [eventsData, setEventsData] = useState(MOCK_DATA);
   const [modal1,setModal1]=useState(false);
   const [modal2,setModal2]=useState(false);
+  const [isOpen,setIsOpen]=useState(false);
   const toggle1=()=>setModal1(!modal1);
   const toggle2=()=>setModal2(!modal2);
+  
+
   useEffect(() => {
     document.onkeyup = function(e) {
     if (e.ctrlKey && e.which == 66) {
       setModal1(!modal1)}
-}
-// window.onload = function(){
-//   var hideMe = document.getElementById('hideMe');
-//   document.onclick = function(e){
-//      if(e.target.id !== 'hideMe'){
-//         hideMe.style.display = 'none';
-//      }
-//   };
-// }
-;
+};
 });
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-    state: { globalFilter },
-    setGlobalFilter
-  } = useTable(
-    {
-      columns,
-      data,
-      disableSortRemove: true
-    },
-    useFilters,
-    useGlobalFilter,
-    useSortBy
-  );
-  
+  // const {
+  //   getTableProps,
+  //   getTableBodyProps,
+  //   headerGroups,
+  //   rows,
+  //   prepareRow,
+  //   state: { globalFilter },
+  //   setGlobalFilter
+  // } = useTable(
+  //   {
+  //     columns,
+  //     data,
+  //     disableSortRemove: true
+  //   },
+  //   useFilters,
+  //   useGlobalFilter,
+  //   useSortBy
+  // );
+  function toggling(index){
+    setIsOpen(!isOpen);
+    if(isOpen===false){document.getElementById(index).style.display="block"} 
+    else{document.getElementById(index).style.display="none"} 
+  }
   function activeUser(){
     setActive(current => !current)
     if(active==true){
@@ -182,6 +182,67 @@ function calanderView(){
     Object.assign(document.getElementById("calan").style, activeStyle);
   }
   
+  function sortTable(n) {
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    table = document.getElementById("myTable");
+    switching = true;
+    dir = "asc"; 
+    while (switching) {
+      switching = false;
+      rows = table.rows;
+      for (i = 1; i < (rows.length - 1); i++) {
+        shouldSwitch = false;
+        x = rows[i].getElementsByTagName("TD")[n];
+        y = rows[i + 1].getElementsByTagName("TD")[n];
+        if (dir == "asc" && n!=0 && n!=2) {
+          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            shouldSwitch= true;
+            break;
+          }
+        } else if (dir == "desc" && n!=0 && n!=2) {
+          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+            shouldSwitch = true;
+            break;
+          }
+        }
+        else if (dir == "asc" && n==0) {
+          console.log(x.innerHTML.split(">"))
+          if (x.innerHTML.split(">")[1].toLowerCase() > y.innerHTML.split(">")[1].toLowerCase()) {
+            shouldSwitch= true;
+            break;
+          }
+        } else if (dir == "desc" && n==0) {
+          if (x.innerHTML.split(">")[1].toLowerCase() < y.innerHTML.split(">")[1].toLowerCase()) {
+            shouldSwitch = true;
+            break;
+          }
+        }
+        else if (dir == "asc" && n==2) {
+          if ((x.innerHTML - y.innerHTML)>0) {
+            shouldSwitch= true;
+            break;
+          }
+        } else if (dir == "desc" && n==2) {
+          if ((x.innerHTML - y.innerHTML)<0) {
+            shouldSwitch = true;
+            break;
+          }
+        }
+        
+      }
+      if (shouldSwitch) {
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+        switchcount ++;      
+      } else {
+        if (switchcount == 0 && dir == "asc") {
+          dir = "desc";
+          switching = true;
+        }
+      }
+    }
+  }
+
   return (
     <>
     <div className='row mt-2'>
@@ -211,7 +272,7 @@ function calanderView(){
                     <div id="searchforservice" className='text-center mt-2 p-12 '>
                       <svg className='mb-5 mt-11' stroke="currentColor" fill="#718096" stroke-width="0" viewBox="0 0 24 24" focusable="false" class="chakra-icon css-ag9myg" height="3.5em" width="3.5em" xmlns="http://www.w3.org/2000/svg"><path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"></path><path d="M11.412 8.586c.379.38.588.882.588 1.414h2a3.977 3.977 0 0 0-1.174-2.828c-1.514-1.512-4.139-1.512-5.652 0l1.412 1.416c.76-.758 2.07-.756 2.826-.002z"></path></svg>
                       <p style={{color:"rgba(0,0,0,0.64)",fontSize:"16px"}}>Search for a service or add one from scratch</p>
-                    <p style={{fontSize:"16px"}}>Have a CSV file <a href="/">Upload it here</a></p>
+                    <p style={{fontSize:"16px"}}>Have a CSV file <a id="upload" href="/">Upload it here</a></p>
                     </div>
                     <button style={{backgroundColor:"rgba(0,0,0,0.80)",borderRadius:"8px",border:"none", color:"white", width:"100%",padding:"12px 0px",fontSize:"18px"}}>Add from scratch</button>
                 </ModalBody>
@@ -239,42 +300,41 @@ function calanderView(){
             <div className='row'>
     <div className=' flex '>
     <p className='mt-2 fil'>Filter: </p>
-    <button id="fillters" onClick={() => { activeUser()}} className={active==true ? ' px-2 h-9 ml-2 text-center border border-slate-400 rounded-md cursor-pointer focus:outline-0' : 'focus:outline-0  cursor-pointer px-2 h-9 ml-2 text-center border border-slate-400 rounded-md '}style={{backgroundColor:active==true ? "#edf2f7" : "#F3F4F6",color:"#1a202c"}}><i className="fa fa-circle" style={{fontSize:"10px",color:active==true ?"green":"grey"}} /> {active==true ?"Active":"Inactive"}   <i className="fa fa-random"></i></button>
-    <select onChange={category} id="fillters" className='cursor-pointer fil w-21 h-9 ml-2 text-center border border-slate-400 rounded-md bg-#edf2f7 focus:outline-0'>
-      <option value="allProjects">Category</option>
-      <option value="Recruiting">Recruiting</option>
-      <option value="Hosting">Hosting</option>
-      <option value="Accounting">Accounting</option>
-      <option value="Design">Design</option>      
-      <option value="Marketing">Marketing</option>
-      <option value="Video Streaming">Video Streaming</option>
+    <button id="fillters" onClick={() => { activeUser()}} className={active==true ? 'font-bold px-2 h-9 ml-2 text-center border border-slate-400 rounded-md cursor-pointer focus:outline-0' : 'font-bold focus:outline-0  cursor-pointer px-2 h-9 ml-2 text-center border border-slate-400 rounded-md '}style={{backgroundColor:active==true ? "#edf2f7" : "#F3F4F6",color:"#1a202c"}}><i className="fa fa-circle" style={{fontSize:"10px",color:active==true ?"green":"grey"}} /> {active==true ?"Active":"Inactive"}   <i className="fa fa-random"></i></button>
+    <select onChange={category} id="fillters" className='font-bold cursor-pointer fil w-21 h-9 ml-2 text-center border border-slate-400 rounded-md focus:outline-0'style={{color:"rgba(0,0,0,0.64)",backgroundColor:"#edf2f7"}}>
+      <option style={{backgroundColor:"white",color:"black"}} value="allProjects">Category</option>
+      <option style={{backgroundColor:"white",color:"black"}} value="Recruiting">Recruiting</option>
+      <option style={{backgroundColor:"white",color:"black"}} value="Hosting">Hosting</option>
+      <option style={{backgroundColor:"white",color:"black"}} value="Accounting">Accounting</option>
+      <option style={{backgroundColor:"white",color:"black"}} value="Design">Design</option>      
+      <option style={{backgroundColor:"white",color:"black"}} value="Marketing">Marketing</option>
+      <option style={{backgroundColor:"white",color:"black"}} value="Video Streaming">Video Streaming</option>
     </select>
-    <select onChange={period} id="fillters" className='cursor-pointer fil w-20 h-9 ml-2 text-center border border-slate-400 rounded-md bg-#edf2f7 focus:outline-0'>
-      <option value="allProjects">Period</option>
-      <option value="1 month">1 month</option>
-      <option value="2 month">2 month</option>
-      <option value="6 month">6 month</option>
-      <option value="1 year">1 year</option>
-      <option value="One time">One time</option>
+    <select onChange={period} id="fillters" className='font-bold cursor-pointer fil w-20 h-9 ml-2 text-center border border-slate-400 rounded-md focus:outline-0' style={{color:"rgba(0,0,0,0.64)",backgroundColor:"#edf2f7"}}>
+      <option style={{backgroundColor:"white",color:"black"}} value="allProjects">Period</option>
+      <option style={{backgroundColor:"white",color:"black"}} value="1 month">1 month</option>
+      <option style={{backgroundColor:"white",color:"black"}} value="2 month">2 month</option>
+      <option style={{backgroundColor:"white",color:"black"}} value="6 month">6 month</option>
+      <option style={{backgroundColor:"white",color:"black"}} value="1 year">1 year</option>
+      <option style={{backgroundColor:"white",color:"black"}} value="One time">One time</option>
     </select>
-    <select onChange={payment} id="fillters" className='cursor-pointer fil h-9 text-center ml-2 border border-slate-400 rounded-md bg-#edf2f7 focus:outline-0'>
-      <option value="allProjects">Payment Method</option>
-      <option value="Debit">Debit</option>
-      <option value="Credit">Credit</option>
-      <option value="Invoice">Invoice</option>
+    <select onChange={payment} id="fillters" className='font-bold cursor-pointer fil h-9 text-center ml-2 border border-slate-400 rounded-md focus:outline-0'style={{color:"rgba(0,0,0,0.64)",backgroundColor:"#edf2f7"}}>
+      <option style={{backgroundColor:"white",color:"black"}} value="allProjects">Payment Method</option>
+      <option style={{backgroundColor:"white",color:"black"}} value="Paypal">Paypal</option>
+      <option style={{backgroundColor:"white",color:"black"}} value="Credit card">Credit card</option>
     </select>
-    <select onChange={colorChange} id="fillters" className='cursor-pointer fil w-20 h-9 text-center ml-2 border border-slate-400 rounded-md bg-#edf2f7 focus:outline-0'>
-      <option value="allProjects">Color</option>
-      <option value="rgba(255, 0, 0, 0.4)">Red</option>
-      <option value="rgba(60, 179, 113,0.8)">Green</option>
-      <option value="rgba(109, 143, 172, 0.6)">Grey</option>
-      <option value="rgba(240, 240, 240,0.4)">White</option>
-      <option value="rgba(0, 0, 255, 0.4)">Blue</option>
+    <select onChange={colorChange} id="fillters" className='font-bold cursor-pointer fil w-20 h-9 text-center ml-2 border border-slate-400 rounded-md focus:outline-0'style={{color:"rgba(0,0,0,0.64)",backgroundColor:"#edf2f7"}}>
+      <option style={{backgroundColor:"white",color:"black"}} value="allProjects">Color</option>
+      <option style={{backgroundColor:"white",color:"black"}} value="rgba(255, 0, 0, 0.4)">Red</option>
+      <option style={{backgroundColor:"white",color:"black"}} value="rgba(60, 179, 113,0.8)">Green</option>
+      <option style={{backgroundColor:"white",color:"black"}} value="rgba(109, 143, 172, 0.6)">Grey</option>
+      <option style={{backgroundColor:"white",color:"black"}} value="rgba(240, 240, 240,0.4)">White</option>
+      <option style={{backgroundColor:"white",color:"black"}} value="rgba(0, 0, 255, 0.4)">Blue</option>
     </select>
-    <select id="fillters" className='cursor-pointer fil w-20 h-9 ml-2 text-center border border-slate-400 rounded-md bg-#edf2f7 focus:outline-0'>
-      <option value="allProjects">Tags</option>
-      <option value="openProjects">Open Projects</option>
-      <option value="closedProjects">Closed Projects</option>
+    <select id="fillters" className='font-bold cursor-pointer fil w-20 h-9 ml-2 text-center border border-slate-400 rounded-md focus:outline-0'style={{color:"rgba(0,0,0,0.64)",backgroundColor:"#edf2f7"}}>
+      <option style={{backgroundColor:"white",color:"black"}} value="allProjects">Tags</option>
+      <option style={{backgroundColor:"white",color:"black"}} value="openProjects">Open Projects</option>
+      <option style={{backgroundColor:"white",color:"black"}} value="closedProjects">Closed Projects</option>
     </select>
 </div>
 </div>
@@ -314,13 +374,13 @@ function calanderView(){
   <div className='col-lg-8 mt-1 tableDiv'>
     
 
-    <div className="table-container "id="listv" style={{height:"540px",overflow:"scroll",overflowX:"hidden"}}>
+    <div className="table-container "id="listv" style={{height:data.length!=0 ? "540px" : "40px",overflow:"scroll",overflowX:"hidden"}}>
      <style jsx global>{`
         .table-container::-webkit-scrollbar {
           display: none;
       }
       `}</style>
-      <table {...getTableProps()} id="tableData">
+      {/*<table {...getTableProps()} id="tableData">
         <thead>
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -350,10 +410,51 @@ function calanderView(){
             );
           })}
         </tbody>
+      </table> */}
+      <table id="myTable">
+    <tbody>
+        <tr>
+          <th onClick={() => { sortTable(0)}} style={{color:"#4A5568",cursor:"pointer"}} id="fillters">Name</th>
+          <th onClick={() => { sortTable(1)}} style={{color:"#4A5568",cursor:"pointer"}} id="fillters">Category</th>
+          <th onClick={() => { sortTable(2)}} style={{color:"#4A5568",cursor:"pointer"}} id="fillters">Cost</th>
+          <th onClick={() => { sortTable(3)}} style={{color:"#4A5568",cursor:"pointer"}} id="fillters">Billing Period</th>
+          <th onClick={() => { sortTable(4)}} style={{color:"#4A5568",cursor:"pointer"}} id="fillters">Payment Method</th>
+          <th onClick={() => { sortTable(5)}} style={{color:"#4A5568",cursor:"pointer"}} id="fillters">Next Payment</th>
+        </tr>
+        {data.map((item, index) => (
+          <tr key={index} style={{borderTop:"2px solid #f7fafc",cursor:"pointer"}} id="fillters">
+            <td>
+              <img src={item.image} alt="" height={30} style={{borderRadius:"15px"}} /> {item.first_name}
+            </td>
+            <td>{item.category}</td>
+            <td>{item.cost}</td>
+            <td>{item.period}</td>
+            <td><img src={item.credit} alt="" height={18}/> {item.payment_method}</td>
+            <td>{format(new Date(item.next_payment), 'dd/MM/yyyy')} <button onClick={() => { toggling(index)}}  className='ml-4 w-8 h-8 focus:outline-none border-0 rounded-lg bg-[#e2e8f0]'>
+            <svg stroke="currentColor" fill="black" stroke-width="0" viewBox="0 0 24 24" font-size="1.1rem" class="menu-icon" aria-hidden="true" focusable="false" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"></path></svg>
+              </button>
+              
+              <div id={index} style={{border:"1px solid #e2e8f0",borderRadius:"10px",boxShadow:"0 1px 2px 0 rgba(0,0,0,0.05)" ,position:"absolute",left:"60%",width:"16rem",display:"none",backgroundColor:"white",padding:"10px 2px"}} >
+              <button className='hover:bg-[#e2e8f0] focus:outline-none' style={{color: "inherit",width:"100%",border:"none",backgroundColor:"white",textAlign:"left",padding:"5px"}}><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" font-size="18" focusable="false" aria-hidden="true" class="chakra-menu__icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M19.045 7.401c.378-.378.586-.88.586-1.414s-.208-1.036-.586-1.414l-1.586-1.586c-.378-.378-.88-.586-1.414-.586s-1.036.208-1.413.585L4 13.585V18h4.413L19.045 7.401zm-3-3 1.587 1.585-1.59 1.584-1.586-1.585 1.589-1.584zM6 16v-1.585l7.04-7.018 1.586 1.586L7.587 16H6zm-2 4h16v2H4z"></path></svg> Edit</button>
+              <button className='hover:bg-[#e2e8f0] focus:outline-none' style={{color: "inherit", width:"100%",border:"none",backgroundColor:"white",textAlign:"left",padding:"5px"}}><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" font-size="18" focusable="false" aria-hidden="true" class="chakra-menu__icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H10c-1.103 0-2 .897-2 2v4H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2v-4h4c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zM4 20V10h10l.002 10H4zm16-6h-4v-4c0-1.103-.897-2-2-2h-4V4h10v10z"></path></svg> Duplicate</button>
+              <button className='hover:bg-[#e2e8f0] focus:outline-none' style={{color: "inherit", width:"100%",border:"none",backgroundColor:"white",textAlign:"left",padding:"5px"}}><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" font-size="18" focusable="false" aria-hidden="true" class="chakra-menu__icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="m13 3 3.293 3.293-7 7 1.414 1.414 7-7L21 11V3z"></path><path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"></path></svg> Visit Website</button>
+              <button className='hover:bg-[#e2e8f0] focus:outline-none' style={{color: "inherit", width:"100%",border:"none",backgroundColor:"white",textAlign:"left",padding:"5px"}}><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" font-size="18" focusable="false" aria-hidden="true" class="chakra-menu__icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M7 11h10v2H7z"></path><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path></svg> Move to Inactive</button>
+              <button className='hover:bg-[#e2e8f0] focus:outline-none' style={{color:"red", width:"100%",border:"none",backgroundColor:"white",textAlign:"left",padding:"5px"}}><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" font-size="18" focusable="false" aria-hidden="true" class="chakra-menu__icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M15 2H9c-1.103 0-2 .897-2 2v2H3v2h2v12c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2V8h2V6h-4V4c0-1.103-.897-2-2-2zM9 4h6v2H9V4zm8 16H7V8h10v12z"></path></svg> Delete</button>
+              </div>
+              </td>
+          </tr>
+        ))}
+      </tbody>
       </table>
       </div>
- 
-      <Card.Group className='table-container mt-2 ml-1'id="blockv" style={{display:"none",height:"560px",overflow:"scroll",overflowX:"hidden"}} >
+      {data.length===0 && (
+                                    <div id='noData' style={{textAlign:"center",alignItems:"center"}}>
+                                        <img src="https://web.subly.app/empty-states/light/32.svg"></img>
+                                        <h2>There are no active subscriptions in this project</h2>
+                                        <p>Start adding subscriptions to this project by clicking the "New Subscription" button</p>
+                                    </div>
+                                )}
+      <Card.Group className='table-container mt-2 ml-1'id="blockv" style={{display:"none",height:data.length!=0 ? "560px" : "40px",overflow:"scroll",overflowX:"hidden"}} >
         <Grid columns = { 3 }
         stackable > {
           mockData && mockData.map((item) => ( < Grid.Column key = { item.id } style={{paddingBottom:"0"}}>
@@ -385,9 +486,9 @@ function calanderView(){
         style={{ height:"640px",overflow:"scroll",overflowX:"hidden" }}
         
       />
+      
       </div>
     </div>
-    
     </div>
     </>
   );

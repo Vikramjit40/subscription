@@ -223,9 +223,9 @@ const Sidebar = () => {
                                     <p style={{width:'15rem',color:"#6530b2"}} ><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" focusable="false" class="chakra-icon css-13otjrl" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M11.219 3.375 8 7.399 4.781 3.375A1.002 1.002 0 0 0 3 4v15c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2V4a1.002 1.002 0 0 0-1.781-.625L16 7.399l-3.219-4.024c-.381-.474-1.181-.474-1.562 0zM5 19v-2h14.001v2H5zm10.219-9.375c.381.475 1.182.475 1.563 0L19 6.851 19.001 15H5V6.851l2.219 2.774c.381.475 1.182.475 1.563 0L12 5.601l3.219 4.024z"></path></svg> Upgrade your plan</p>
                                 )}
    </div>
-        <Link onClick={toggle} href="/" id="help" data-placement="right" className='flex items-center w-full h-full hover:bg-hoverCol mt-4'><div><img src="/question.svg"  className='p-3 ' /></div>{toggleCollapse && (
+        <div onClick={toggle}  id="help" data-placement="right" className='flex items-center w-full h-full hover:bg-hoverCol mt-4'><div><img src="/question.svg"  className='p-3 ' /></div>{toggleCollapse && (
                                     <span style={{width:'11.5rem',paddingLeft:"3px",color:"rgba(0,0,0,0.64)"}} >Help</span>
-                                )}</Link>{!toggleCollapse && <UncontrolledTooltip 
+                                )}</div>{!toggleCollapse && <UncontrolledTooltip 
                                     placement="right"
                                     target={"help"}
                                   >Help</UncontrolledTooltip>}
@@ -270,9 +270,9 @@ const Sidebar = () => {
                     </div>
                 </ModalBody>
             </Modal>
-        <Link onClick={toggle2} href="/" id="what" data-placement="right" className='flex items-center w-full h-full hover:bg-hoverCol mb-8 mt-2'><div><img src="/exclamation.svg"  className=' p-3' /></div>{toggleCollapse && (
+        <div onClick={toggle2} id="what" data-placement="right" className='flex items-center w-full h-full hover:bg-hoverCol mb-8 mt-2'><div><img src="/exclamation.svg"  className=' p-3' /></div>{toggleCollapse && (
                                     <span style={{width:'11.5rem',paddingLeft:"3px",color:"rgba(0,0,0,0.64)"}} >What's New</span>
-                                )}</Link>{!toggleCollapse && <UncontrolledTooltip 
+                                )}</div>{!toggleCollapse && <UncontrolledTooltip 
                                     placement="right"
                                     target={"what"}
                                   >What's New</UncontrolledTooltip>}

@@ -141,8 +141,63 @@ svg {display: inline;}
   border-top:1px solid #e2e8f0;
   border-bottom:2px solid #e2e8f0;
   margin-bottom: 5px;
-
 }
+.rbc-toolbar {
+  position: relative;
+}
+.rbc-btn-group > button:first-child:not(:last-child) {
+color:#006ad3;
+border: 1px solid #006ad3;
+border-radius: 8px !important;
+position: absolute;
+right:0;
+font-weight: bold;
+}
+.rbc-btn-group > button:first-child:not(:last-child):focus{
+  outline: none;
+  background-color:transparent;
+}
+.rbc-btn-group > button:first-child:not(:last-child):hover{
+  background-color: #f2f9ff;
+}
+.rbc-toolbar .rbc-toolbar-label{
+  font-weight: bold;
+  flex-grow: 0;
+}
+.rnav div:nth-child(4){
+display: none !important;
+}
+.rnav div:nth-child(5){
+  display: none !important;
+  }
+.rbc-toolbar{
+  justify-content: inherit;
+}
+.rbc-btn-group > button:last-child:not(:first-child):hover{
+  background-color: #edf2f7;
+}
+.rbc-btn-group > button:last-child:not(:first-child):focus{
+  background-color: transparent;
+  outline: none;
+}
+.rbc-btn-group > button:last-child:not(:first-child)::after{
+  content: " >" !important;
+}
+.rbc-btn-group > button:not(:first-child):not(:last-child):hover{
+  background-color: #edf2f7;
+  }
+  .rbc-btn-group > button:not(:first-child):not(:last-child):focus{
+    background-color: transparent;
+    outline:none
+    }
+.rbc-btn-group > button:not(:first-child):not(:last-child)::before{
+content:"< "
+}
+.rbc-btn-group > button:not(:first-child):not(:last-child),.rbc-btn-group > button:last-child:not(:first-child){
+border-radius: 8px !important;
+margin-left: 3px;
+  }
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

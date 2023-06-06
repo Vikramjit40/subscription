@@ -315,11 +315,11 @@ function calanderView(){
       <option style={{backgroundColor:"white",color:"black"}} value="rgba(240, 240, 240,0.4)">White</option>
       <option style={{backgroundColor:"white",color:"black"}} value="rgba(0, 0, 255, 0.4)">Blue</option>
     </select>
-    <select id="fillters" className='font-bold cursor-pointer fil w-20 h-9 ml-2 text-center border border-slate-400 rounded-md focus:outline-0'style={{color:"rgba(0,0,0,0.64)",backgroundColor:"#edf2f7"}}>
+    {/* <select id="fillters" className='font-bold cursor-pointer fil w-20 h-9 ml-2 text-center border border-slate-400 rounded-md focus:outline-0'style={{color:"rgba(0,0,0,0.64)",backgroundColor:"#edf2f7"}}>
       <option style={{backgroundColor:"white",color:"black"}} value="allProjects">Tags</option>
       <option style={{backgroundColor:"white",color:"black"}} value="openProjects">Open Projects</option>
       <option style={{backgroundColor:"white",color:"black"}} value="closedProjects">Closed Projects</option>
-    </select>
+    </select> */}
 </div>
 </div>
             </div>

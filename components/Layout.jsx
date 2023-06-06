@@ -43,13 +43,14 @@ var body = document.getElementsByTagName("BODY")[0];
   function widthChangeCallback(myMediaQuery) {
     if(myMediaQuery.matches) {
       setMedia(true);  
-      // document.querySelector("p").textContent = "I am wider than 599px now.";
+     
      } else {
       setMedia(false);  
-      //  document.querySelector("p").textContent = "I am narrower than 599px now.";
+
      }
   }
   myMediaQuery.addEventListener('change', widthChangeCallback);
+
 });
 const [isProjectOpen,setIsProjectOpen]=useState(false)
   function projecttoggling(ev){

@@ -1,7 +1,6 @@
 import React, { useMemo, useState,useEffect } from 'react';
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
-
 import classNames from 'classnames'
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useTable, useSortBy,useGlobalFilter, useFilters } from 'react-table';
@@ -28,13 +27,14 @@ const SortingTable = props => {
   const data = mockData;
   const [active,setActive]=useState(true);
   const [eventsData, setEventsData] = useState(MOCK_DATA);
-
-
+  const [modals,setModals]=useState(false);
+  const [datamodal,setDataModel]=useState();
 
   const [isOpen,setIsOpen]=useState(false);
+  function toggles(item,index){setModals(!modals);setDataModel(item); setIsOpen(false);
+    if(isOpen===true){document.getElementById(index).style.display="none"}}
 
   function eventStyleGetter(event, start, end, isSelected) {
-    console.log(event);
     var backgroundColor = event.color;
     var style = {
         backgroundColor: backgroundColor,
@@ -420,15 +420,42 @@ function calanderView(){
               </button>
               
               <div id={index} style={{border:"1px solid #e2e8f0",borderRadius:"10px",boxShadow:"0 1px 2px 0 rgba(0,0,0,0.05)" ,position:"absolute",left:"63.5%",width:"16rem",display:"none",backgroundColor:"white",padding:"10px 2px"}} >
-              <button className='hover:bg-[#e2e8f0] focus:outline-none' style={{color: "inherit",width:"100%",border:"none",backgroundColor:"white",textAlign:"left",padding:"5px"}}><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" font-size="18" focusable="false" aria-hidden="true" class="chakra-menu__icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M19.045 7.401c.378-.378.586-.88.586-1.414s-.208-1.036-.586-1.414l-1.586-1.586c-.378-.378-.88-.586-1.414-.586s-1.036.208-1.413.585L4 13.585V18h4.413L19.045 7.401zm-3-3 1.587 1.585-1.59 1.584-1.586-1.585 1.589-1.584zM6 16v-1.585l7.04-7.018 1.586 1.586L7.587 16H6zm-2 4h16v2H4z"></path></svg> Edit</button>
-              <button className='hover:bg-[#e2e8f0] focus:outline-none' style={{color: "inherit", width:"100%",border:"none",backgroundColor:"white",textAlign:"left",padding:"5px"}}><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" font-size="18" focusable="false" aria-hidden="true" class="chakra-menu__icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H10c-1.103 0-2 .897-2 2v4H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2v-4h4c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zM4 20V10h10l.002 10H4zm16-6h-4v-4c0-1.103-.897-2-2-2h-4V4h10v10z"></path></svg> Duplicate</button>
-              <button className='hover:bg-[#e2e8f0] focus:outline-none' style={{color: "inherit", width:"100%",border:"none",backgroundColor:"white",textAlign:"left",padding:"5px"}}><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" font-size="18" focusable="false" aria-hidden="true" class="chakra-menu__icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="m13 3 3.293 3.293-7 7 1.414 1.414 7-7L21 11V3z"></path><path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"></path></svg> Visit Website</button>
-              <button className='hover:bg-[#e2e8f0] focus:outline-none' style={{color: "inherit", width:"100%",border:"none",backgroundColor:"white",textAlign:"left",padding:"5px"}}><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" font-size="18" focusable="false" aria-hidden="true" class="chakra-menu__icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M7 11h10v2H7z"></path><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path></svg> Move to Inactive</button>
-              <button className='hover:bg-[#e2e8f0] focus:outline-none' style={{color:"red", width:"100%",border:"none",backgroundColor:"white",textAlign:"left",padding:"5px"}}><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" font-size="18" focusable="false" aria-hidden="true" class="chakra-menu__icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M15 2H9c-1.103 0-2 .897-2 2v2H3v2h2v12c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2V8h2V6h-4V4c0-1.103-.897-2-2-2zM9 4h6v2H9V4zm8 16H7V8h10v12z"></path></svg> Delete</button>
+              <button onClick={()=>{toggles(item,index)}} className='hover:bg-[#e2e8f0] focus:outline-none' style={{color: "inherit",width:"100%",border:"none",backgroundColor:"white",textAlign:"left",padding:"5px"}}><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" font-size="18" focusable="false" aria-hidden="true" class="chakra-menu__icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M19.045 7.401c.378-.378.586-.88.586-1.414s-.208-1.036-.586-1.414l-1.586-1.586c-.378-.378-.88-.586-1.414-.586s-1.036.208-1.413.585L4 13.585V18h4.413L19.045 7.401zm-3-3 1.587 1.585-1.59 1.584-1.586-1.585 1.589-1.584zM6 16v-1.585l7.04-7.018 1.586 1.586L7.587 16H6zm-2 4h16v2H4z"></path></svg> Edit</button>
+              
+              <button className='hover:bg-[#e2e8f0] focus:outline-none' style={{color: "inherit", width:"100%",border:"none",backgroundColor:"white",textAlign:"left",padding:"5px"}} onClick={()=>{toggling(index)}}><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" font-size="18" focusable="false" aria-hidden="true" class="chakra-menu__icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H10c-1.103 0-2 .897-2 2v4H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2v-4h4c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zM4 20V10h10l.002 10H4zm16-6h-4v-4c0-1.103-.897-2-2-2h-4V4h10v10z"></path></svg> Duplicate</button>
+              <button className='hover:bg-[#e2e8f0] focus:outline-none' style={{color: "inherit", width:"100%",border:"none",backgroundColor:"white",textAlign:"left",padding:"5px"}}><Link onClick={()=>{toggling(index)}} style={{color:"inherit"}} href={item.url} target='_blank'><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" font-size="18" focusable="false" aria-hidden="true" class="chakra-menu__icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="m13 3 3.293 3.293-7 7 1.414 1.414 7-7L21 11V3z"></path><path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"></path></svg> Visit Website</Link></button>
+              <button className='hover:bg-[#e2e8f0] focus:outline-none' style={{color: "inherit", width:"100%",border:"none",backgroundColor:"white",textAlign:"left",padding:"5px"}}onClick={()=>{toggling(index)}} ><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" font-size="18" focusable="false" aria-hidden="true" class="chakra-menu__icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M7 11h10v2H7z"></path><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path></svg> Move to Inactive</button>
+              <button className='hover:bg-[#e2e8f0] focus:outline-none' style={{color:"red", width:"100%",border:"none",backgroundColor:"white",textAlign:"left",padding:"5px"}} onClick={()=>{toggling(index)}}><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" font-size="18" focusable="false" aria-hidden="true" class="chakra-menu__icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M15 2H9c-1.103 0-2 .897-2 2v2H3v2h2v12c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2V8h2V6h-4V4c0-1.103-.897-2-2-2zM9 4h6v2H9V4zm8 16H7V8h10v12z"></path></svg> Delete</button>
               </div>
               </td>
           </tr>
         ))}
+        {datamodal!=undefined && (<Modal isOpen={modals} toggle={toggles} >
+                <ModalHeader style={{backgroundColor:"#f7fafc",borderBottom:"0"}}cssModule={{'modal-title': 'w-100 text-center '}} toggle={toggles}><h3>Edit Subscription</h3></ModalHeader>
+                <ModalBody style={{backgroundColor:"#f7fafc"}}>
+                <Card style={{backgroundColor:datamodal.color,borderRadius:"8px",width:"100%"}} >
+                <Card.Content > 
+                  <img src={datamodal.image} className='left floated mt-2 mr-1 w-11 h-11'style={{borderRadius:"50px"}}/> 
+                <Card.Header className='left floated' style = {
+                    { marginTop: "10px",color:datamodal.color=="rgba(240, 240, 240,0.4)"?"black":"white" }
+                } > {datamodal.first_name }</Card.Header>    
+                <Card.Header className='right floated' style = {
+                    { marginTop: "13px" ,fontSize:"15px", color:datamodal.color=="rgba(240, 240, 240,0.4)"?"black":"white"}
+                } > $ {datamodal.cost}</Card.Header>
+                <Card.Description style={{color:datamodal.color=="rgba(240, 240, 240,0.4)"?"black":"white"}} ><p className='left floated ml-12'> { datamodal.category } </p><p className='right floated'>/ { datamodal.period }</p></Card.Description>               
+                </Card.Content>    
+                 </Card> 
+                 <h3>General</h3>
+                 <form>
+                  <label>Name<span style={{color:"red"}}>*</span></label>
+                  <input type='text' value={datamodal.first_name}></input>
+                  <label>Category</label>
+                  <select>
+                    <option></option>
+                  </select>
+                 </form>
+                </ModalBody>
+            </Modal>)}
       </tbody>
       </table>
       </div>

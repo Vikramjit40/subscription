@@ -25,10 +25,10 @@ const Layout = ({children}) => {
   const activeMenus=useMemo(()=> menuItem.find(menu=>menu.link===router.pathname ),[router.pathname] )
   
   useEffect(() => {
-    document.onkeyup = function(e) {
-    if (e.ctrlKey && e.which == 66) {
-      setModal1(!modal1)}
-};
+    document.addEventListener("keydown",e => {
+      e.preventDefault();
+    if (e.key.toLowerCase()==="k" && e.ctrlKey	) {
+      setModal1(!modal1)}})
 var body = document.getElementsByTagName("BODY")[0];
   body.addEventListener("click", function () {
     setIsUserOpen(false);
@@ -106,7 +106,7 @@ const [isProjectOpen,setIsProjectOpen]=useState(false)
       <div className='col-xl-5 col-lg-9 col-sm-10 pt-1 ' >
         <div className=' flex gap-x-3 ml-12 newSub'>
             <div className='fontsi' style={{textAlign:"left"}}>
-            <button id="fillters" onClick={toggle1} className='focus' style={{borderRadius:"5px",fontSize:"15px",padding:"4px 10px",display:"flex",backgroundColor:"#edf2f7"}}><div style={{display:"flex"}}><svg  stroke="currentColor" fill="#718096" stroke-width="0" viewBox="0 0 24 24" focusable="false" class="chakra-icon css-lgbjuw" height="2em" width="1.5em" xmlns="http://www.w3.org/2000/svg"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"></path></svg><p className='ml-1 mt-1 ' style={{color:"rgba(0,0,0,0.64)",fontWeight:"bold"}}>Search</p></div><div className='ml-3'style={{fontSize:"13px",marginTop:"8px"}}><kbd style={{color:"black",backgroundColor:"white",fontWeight:"bold"}}>Ctrl</kbd><kbd className=" ml-1 "style={{color:"black",backgroundColor:"white",fontWeight:"bold"}}>b</kbd></div></button>
+            <button id="fillters" onClick={toggle1} className='focus' style={{borderRadius:"5px",fontSize:"15px",padding:"4px 10px",display:"flex",backgroundColor:"#edf2f7"}}><div style={{display:"flex"}}><svg  stroke="currentColor" fill="#718096" stroke-width="0" viewBox="0 0 24 24" focusable="false" class="chakra-icon css-lgbjuw" height="2em" width="1.5em" xmlns="http://www.w3.org/2000/svg"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"></path></svg><p className='ml-1 mt-1 ' style={{color:"rgba(0,0,0,0.64)",fontWeight:"bold"}}>Search</p></div><div className='ml-3'style={{fontSize:"13px",marginTop:"8px"}}><kbd style={{color:"black",backgroundColor:"white",fontWeight:"bold"}}>Ctrl</kbd><kbd className=" ml-1 "style={{color:"black",backgroundColor:"white",fontWeight:"bold"}}>K</kbd></div></button>
             </div>
             <Modal style={{overflow:"hidden",borderRadius:"10px",zIndex:"1",borderColor: "rgb(19,128,228)",boxShadow: "rgb(19,128,228) 0px 0px 0px 1px",outline: "0"}} isOpen={modal1} fade={true} toggle={toggle1} className='mod ' >
               <ModalBody ><div style={{display:"flex"}}><div className='mt-2'><svg  stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" focusable="false" class="chakra-icon css-lgbjuw" height="2em" width="1.5em" xmlns="http://www.w3.org/2000/svg"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"></path></svg></div><input className='focus' style={{width:"100%",padding:"8px 10px",fontSize:"20px"}} type='text' placeholder='Search by name, category or tags'></input></div></ModalBody>

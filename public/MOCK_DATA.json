@@ -12,12 +12,12 @@
     "category": "Design",
     "cost": "44.00",
     "color": "rgba(255, 0, 0, 0.4)",
-    "url":"https://www.figma.com/"
+    "url":"www.figma.com"
   },
   {
     "id": 2,
     "first_name": "Glassdoor",
-    "url":"https://www.glassdoor.com/",
+    "url":"www.glassdoor.com",
     "active": true,
     "payment_method": "Credit card",
     "credit":"https://web.subly.app/payment-methods/card.svg",
@@ -31,7 +31,7 @@
   {
     "id": 3,
     "first_name": "Netlify",
-    "url":"https://www.netlify.com/",
+    "url":"www.netlify.com",
     "active": true,
     "payment_method": "Paypal",
     "credit":"https://web.subly.app/payment-methods/paypal.svg",
@@ -45,7 +45,7 @@
   {
     "id": 4,
     "first_name": "Quickbooks",
-    "url":"https://quickbooks.intuit.com/",
+    "url":"quickbooks.intuit.com",
     "active": true,
     "payment_method": "Paypal",
     "credit":"https://web.subly.app/payment-methods/paypal.svg",
@@ -59,7 +59,7 @@
   {
     "id": 5,
     "first_name": "SendFox",
-    "url":"https://sendfox.com/",
+    "url":"sendfox.com",
     "active": true,
     "payment_method": "Credit card",
     "credit":"https://web.subly.app/payment-methods/card.svg",
@@ -73,7 +73,7 @@
   {
     "id": 6,
     "first_name": "ViSPR SEO Network",
-    "url":"https://vispr.net/",
+    "url":"vispr.net",
     "active": true,
     "payment_method": "Credit card",
     "credit":"https://web.subly.app/payment-methods/card.svg",
@@ -87,12 +87,12 @@
   {
     "id": 7,
     "first_name": "Youtube",
-    "url":"https://www.youtube.com/",
+    "url":"www.youtube.com",
     "active": true,
     "payment_method": "Paypal",
     "credit":"https://web.subly.app/payment-methods/paypal.svg",
     "next_payment": "2023-07-12T17:51:16Z",
-    "period": "1 month",
+    "period": "1 year",
     "category": "Video Streaming",
     "cost": "2.00",
     "image":"https://web.subly.app/_next/image?url=%2Fpopular-services%2Fyoutube.png&w=3840&q=75",
@@ -101,7 +101,7 @@
   {
     "id": 8,
     "first_name": "YT2Posts",
-    "url":"https://yt2posts.com/",
+    "url":"yt2posts.com",
     "active": true,
     "payment_method": "Credit card",
     "credit":"https://web.subly.app/payment-methods/card.svg",

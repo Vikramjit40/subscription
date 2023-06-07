@@ -25,9 +25,10 @@ const Layout = ({children}) => {
   const activeMenus=useMemo(()=> menuItem.find(menu=>menu.link===router.pathname ),[router.pathname] )
   
   useEffect(() => {
-    document.addEventListener("keydown",e => {
-      e.preventDefault();
+    document.addEventListener("keydown",(e) => {
+      
     if (e.key.toLowerCase()==="k" && e.ctrlKey	) {
+      e.preventDefault();
       setModal1(!modal1)}})
 var body = document.getElementsByTagName("BODY")[0];
   body.addEventListener("click", function () {

@@ -542,11 +542,11 @@ function calanderView(){
                   <div style={{display:"flex",fontSize:"17px",gap:"3rem"}}>
                     <span style={{width:"50%"}}>
                   <label style={{color:"rgba(0,0,0,0.64)"}} >Name<span style={{color:"red"}}> *</span></label><br/><br/>
-                  <input id="upna" className='hover:bg-[#e2e8f0]' style={{border:"none",backgroundColor:"#edf2f7",padding:"6px 0px 6px 10px",width:"100%"}} type='text' defaultValue={datamodal.first_name} ></input>
+                  <input id="upna" className='hover:bg-[#e2e8f0]' style={{border:"none",color:"black",backgroundColor:"#edf2f7",padding:"6px 0px 6px 10px",width:"100%"}} type='text' defaultValue={datamodal.first_name} ></input>
                   </span>
                   <span style={{width:"50%"}}>
                   <label style={{color:"rgba(0,0,0,0.64)"}}>Category</label><br/><br/>
-                  <select className='hover:bg-[#e2e8f0]' style={{border:"none",backgroundColor:"#edf2f7",width:"100%",padding:"5.8px 0px 5.8px 10px"}} defaultValue={selecVal} id="categorUpdat" name="categorUpdat">
+                  <select className='hover:bg-[#e2e8f0]' style={{border:"none",color:"black",backgroundColor:"#edf2f7",width:"100%",padding:"5.8px 0px 5.8px 10px"}} defaultValue={selecVal} id="categorUpdat" name="categorUpdat">
                     <option value="s">Select Category</option>
                     <option value="Recruiting" >Recruiting</option>
                     <option value="Hosting" >Hosting</option>
@@ -561,12 +561,12 @@ function calanderView(){
                     <span style={{width:"50%"}}>
                   <label style={{color:"rgba(0,0,0,0.64)"}} >Website</label><br/><br/>
                  
-                    <p style={{border:"none",backgroundColor:"#edf2f7",padding:"3px 0px 3px 10px"}}>https:// <input id="urlup" className='hover:bg-[#e2e8f0]' style={{border:"none",backgroundColor:"#edf2f7",padding:"6px 0px 6px 10px",width:"69%"}} type='text' defaultValue={datamodal.url}></input>
+                    <p style={{border:"none",backgroundColor:"#edf2f7",padding:"3px 0px 3px 10px"}}>https:// <input id="urlup" className='hover:bg-[#e2e8f0]' style={{border:"none",color:"black",backgroundColor:"#edf2f7",padding:"6px 0px 6px 10px",width:"69%"}} type='text' defaultValue={datamodal.url}></input>
                     </p>
                   </span>
                   <span style={{width:"50%"}}>
                   <label style={{color:"rgba(0,0,0,0.64)"}}>Project<span style={{color:"red"}}> *</span></label><br/><br/>
-                  <select className='hover:bg-[#e2e8f0]' style={{border:"none",backgroundColor:"#edf2f7",width:"100%",padding:"5.9px 0px 5.9px 10px"}} >
+                  <select className='hover:bg-[#e2e8f0]' style={{border:"none",backgroundColor:"#edf2f7",width:"100%",padding:"5.9px 0px 5.9px 10px",color:"black"}} >
                     <option value="Personal">Personal</option>
                   </select>
                   </span>
@@ -575,12 +575,12 @@ function calanderView(){
                     <span style={{width:"50%"}}>
                   <label style={{color:"rgba(0,0,0,0.64)"}} >Cost<span style={{color:"red"}}> *</span></label><br/><br/>
                  
-                    <p style={{border:"none",backgroundColor:"#edf2f7",padding:"3px 0px 3px 10px"}}>$ <input className='hover:bg-[#e2e8f0]' style={{border:"none",backgroundColor:"#edf2f7",padding:"6px 0px 6px 10px",width:"92%"}} type='number' defaultValue={datamodal.cost}></input>
+                    <p style={{border:"none",backgroundColor:"#edf2f7",padding:"3px 0px 3px 10px"}}>$ <input className='hover:bg-[#e2e8f0]' style={{border:"none",color:"black",backgroundColor:"#edf2f7",padding:"6px 0px 6px 10px",width:"92%"}} type='number' defaultValue={datamodal.cost}></input>
                     </p>
                   </span>
                   <span style={{width:"50%"}}>
                   <label style={{color:"rgba(0,0,0,0.64)"}}>Expense Type<span style={{color:"red"}}> *</span></label><br/><br/>
-                  <select className='hover:bg-[#e2e8f0]' defaultValue={datamodal.period} style={{border:"none",backgroundColor:"#edf2f7",width:"100%",padding:"5.9px 0px 5.9px 10px"}} >
+                  <select className='hover:bg-[#e2e8f0]' defaultValue={datamodal.period} style={{border:"none",backgroundColor:"#edf2f7",color:"black",width:"100%",padding:"5.9px 0px 5.9px 10px"}} >
                     <option value="One time">One Time</option>
                     <option value="1 month">1 month</option>
                     <option value="2 month">2 months</option>
@@ -592,11 +592,11 @@ function calanderView(){
                   <div style={{display:"flex",fontSize:"17px",gap:"3rem",marginTop:"3rem"}}>
                     <span style={{width:"50%"}}>
                   <label style={{color:"rgba(0,0,0,0.64)"}} >Next Payment</label><br/><br/>
-                   <input className='hover:bg-[#e2e8f0]' style={{border:"none",backgroundColor:"#edf2f7",padding:"6px 0px 6px 10px",width:"100%"}} type='date' defaultValue={subname}></input>
+                   <input className='hover:bg-[#e2e8f0]' style={{border:"none",backgroundColor:"#edf2f7",color:"black",padding:"6px 0px 6px 10px",width:"100%"}} type='date' defaultValue={subname}></input>
                   </span>
                   <span style={{width:"50%"}}>
                   <label style={{color:"rgba(0,0,0,0.64)"}}>Payment Method</label><br/><br/>
-                  <select id="paymeup" className='hover:bg-[#e2e8f0]' defaultValue={datamodal.period} style={{border:"none",backgroundColor:"#edf2f7",width:"100%",padding:"5.9px 0px 5.9px 10px"}} >
+                  <select id="paymeup" className='hover:bg-[#e2e8f0]' defaultValue={datamodal.period} style={{border:"none",color:"black",backgroundColor:"#edf2f7",width:"100%",padding:"5.9px 0px 5.9px 10px"}} >
                     <option value="Credit card">Credit card</option>
                     <option value="Paypal">Paypal</option>
                   </select>

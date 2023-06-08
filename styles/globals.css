@@ -197,7 +197,14 @@ content:"< "
 border-radius: 8px !important;
 margin-left: 3px;
   }
-
+#categorUpdat:focus,#upna:focus,#urlup:focus,#paymeup:focus,#nexpayup:focus,#perup:focus,#cosup:focus,#projup:focus{
+  border: 2px solid #1380e4 !important;
+  outline: none;
+}
+#categornew:focus,#newna:focus,#urlnew:focus,#paymenew:focus,#nexpaynew:focus,#pernew:focus,#cosnew:focus,#projnew:focus{
+  border: 2px solid #1380e4 !important;
+  outline: none;
+}
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

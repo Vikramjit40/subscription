@@ -11,7 +11,7 @@
     "period": "1 month",
     "category": "Design",
     "cost": "44.00",
-    "color": "rgba(255, 0, 0, 0.4)",
+    "color": "#e85454",
     "url":"www.figma.com"
   },
   {
@@ -26,7 +26,7 @@
     "category": "Recruiting",
     "cost": "5.50",
     "image":"https://web.subly.app/_next/image?url=%2Fpopular-services%2Fglassdoor.png&w=1920&q=75",
-    "color": "rgba(240, 240, 240,0.4)"
+    "color": "#3e8e8e"
   },
   {
     "id": 3,
@@ -40,7 +40,7 @@
     "category": "Design",
     "cost": "6.00",
     "image":"https://web.subly.app/_next/image?url=%2Fpopular-services%2Fnetlify.png&w=3840&q=75",
-    "color": "rgba(109, 143, 172, 0.6)"
+    "color": "#6385ba"
   },
   {
     "id": 4,
@@ -54,7 +54,7 @@
     "category": "Hosting",
     "cost": "1.98",
     "image":"https://web.subly.app/_next/image?url=%2Fpopular-services%2Fquickbooks.png&w=3840&q=75",
-    "color": "rgba(240, 240, 240,0.4)"
+    "color": "#3e8e8e"
   },
   {
     "id": 5,
@@ -68,7 +68,7 @@
     "category": "Accounting",
     "cost": "43.00",
     "image":"https://web.subly.app/_next/image?url=https%3A%2F%2Flogo.clearbit.com%2Fsendfox.com&w=3840&q=75",
-    "color": "rgba(0, 0, 255, 0.4)"
+    "color": "#b19de2"
   },
   {
     "id": 6,
@@ -82,7 +82,7 @@
     "category": "Marketing",
     "cost": "5.00",
     "image":"https://web.subly.app/_next/image?url=https%3A%2F%2Flogo.clearbit.com%2Fvispr.net&w=3840&q=75",
-    "color": "rgba(60, 179, 113,0.8)"
+    "color": "#5dbb63"
   },
   {
     "id": 7,
@@ -96,7 +96,7 @@
     "category": "Video Streaming",
     "cost": "2.00",
     "image":"https://web.subly.app/_next/image?url=%2Fpopular-services%2Fyoutube.png&w=3840&q=75",
-    "color": "rgba(109, 143, 172, 0.6)"
+    "color": "#6385ba"
   },
   {
     "id": 8,
@@ -110,6 +110,6 @@
     "category": "Recruiting",
     "cost": "4.00",
     "image":"https://web.subly.app/_next/image?url=https%3A%2F%2Flogo.clearbit.com%2Fyt2posts.com&w=3840&q=75",
-    "color": "rgba(255, 0, 0, 0.4)"
+    "color": "#e85454"
   }
 ]

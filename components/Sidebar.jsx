@@ -253,7 +253,7 @@ const Sidebar = () => {
                         <h3>Get in touch</h3>
                         <p style={{fontSize:"15px"}}>Message<span style={{color:"red"}}> *</span></p>
                         <form action="">
-                            <textarea name="" id="" required="true" cols="45" rows="3" placeholder='Your feedback' style={{padding:"15px"}}></textarea>
+                            <textarea name="" id="" required="true" cols="45" rows="3" placeholder='Your feedback' style={{padding:"15px",color:"black",backgroundColor:"white"}}></textarea>
                             <br/>
                             <br/>
 

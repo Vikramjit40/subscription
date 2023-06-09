@@ -54,20 +54,22 @@ const SortingTable = props => {
   const activeMenus=useMemo(()=> menuItem.find(menu=>menu.link===router.pathname ),[router.pathname] )
   
   useEffect(() => {
+    console.log(activeMenus.id)
     document.addEventListener("keydown",(e) => {
-      
     if (e.key.toLowerCase()==="k" && e.ctrlKey	) {
       e.preventDefault();
       setModal1(!modal1)}})
 var body = document.getElementsByTagName("BODY")[0];
+if(activeMenus.id!=1){
   body.addEventListener("click", function () {
     setIsUserOpen(false);
-    document.getElementById("user").style.display="none"
-  }, false);
-  body.addEventListener("click", function () {
+
+    document.getElementById("user").style.display="none"},false)};
+    if(activeMenus.id!=1){
+    body.addEventListener("click", function () {
     setIsProjectOpen(false);
-    document.getElementById("projct").style.display="none"
-  }, false);
+    
+    document.getElementById("projct").style.display="none"},false);}
   
   let myMediaQuery = window.matchMedia('(min-width:50px) and (max-width: 890px)');
   function widthChangeCallback(myMediaQuery) {
@@ -158,9 +160,12 @@ const [isProjectOpen,setIsProjectOpen]=useState(false)
     toggles()
   }
   }
-  function addnewsub(){
+  function addnewsub(e){
     var obj={};
-    if(document.getElementById("pernew").value.length>0 && document.getElementById("newna").value.length>0 && document.getElementById("nexpaynew").value.length>0 && document.getElementById("pernew").value.length>0 && document.getElementById("cosnew").value.length>0){
+   
+    try{
+    if(document.getElementById("pernew").value.length>0 && document.getElementById("newna").value.length>0 && document.getElementById("nexpaynew").value.length>0 && document.getElementById("cosnew").value.length>0){
+    e.preventDefault();
     obj["category"]=document.getElementById("categornew").value,
     obj["first_name"]=document.getElementById("newna").value,
     obj["url"]=document.getElementById("urlnew").value,
@@ -180,13 +185,20 @@ const [isProjectOpen,setIsProjectOpen]=useState(false)
     }
     else{
       obj["credit"]=""
-    }
+    };
+    toggle4();
+    mockData.push(obj);
+    modata.push(obj);
     
-    modata.push(obj),
-    toggle4()
-}
+    
+}}
+ catch (e) {
+  throw new Error(e.message);
+ }
+ return false;
   }
-  console.log(modata)
+
+
 function inactive(index,item){
   if(active==true){
   for (let object of modata) {
@@ -510,7 +522,7 @@ function calanderView(){
             <button id="fillters" onClick={toggle1} className='focus' style={{borderRadius:"5px",fontSize:"15px",padding:"4px 10px",display:"flex",backgroundColor:"#edf2f7"}}><div style={{display:"flex"}}><svg  stroke="currentColor" fill="#718096" stroke-width="0" viewBox="0 0 24 24" focusable="false" class="chakra-icon css-lgbjuw" height="2em" width="1.5em" xmlns="http://www.w3.org/2000/svg"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"></path></svg><p className='ml-1 mt-1 ' style={{color:"rgba(0,0,0,0.64)",fontWeight:"bold"}}>Search</p></div><div className='ml-3'style={{fontSize:"13px",marginTop:"8px"}}><kbd style={{color:"black",backgroundColor:"white",fontWeight:"bold"}}>Ctrl</kbd><kbd className=" ml-1 "style={{color:"black",backgroundColor:"white",fontWeight:"bold"}}>K</kbd></div></button>
             </div>
             <Modal style={{overflow:"hidden",borderRadius:"10px",zIndex:"1",borderColor: "rgb(19,128,228)",boxShadow: "rgb(19,128,228) 0px 0px 0px 1px",outline: "0"}} isOpen={modal1} fade={true} toggle={toggle1} className='mod ' >
-              <ModalBody ><div style={{display:"flex"}}><div className='mt-2'><svg  stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" focusable="false" class="chakra-icon css-lgbjuw" height="2em" width="1.5em" xmlns="http://www.w3.org/2000/svg"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"></path></svg></div><input className='focus' style={{width:"100%",padding:"8px 10px",fontSize:"20px"}} type='text' placeholder='Search by name, category or tags'></input></div></ModalBody>
+              <ModalBody ><div style={{display:"flex"}}><div className='mt-2'><svg  stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" focusable="false" class="chakra-icon css-lgbjuw" height="2em" width="1.5em" xmlns="http://www.w3.org/2000/svg"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"></path></svg></div><input className='focus' style={{width:"100%",padding:"8px 10px",fontSize:"20px",backgroundColor:"white",color:"black"}} type='text' placeholder='Search by name, category or tags'></input></div></ModalBody>
             </Modal>
             
             
@@ -577,7 +589,7 @@ function calanderView(){
                     <span style={{width:"50%"}}>
                   <label style={{color:"rgba(0,0,0,0.64)"}} >Cost<span style={{color:"red"}}> *</span></label><br/><br/>
                  
-                    <p style={{border:"none",backgroundColor:"#edf2f7",borderRadius:"5px",padding:"2px 0px 2px 10px"}}><span style={{padding:"0px 10px"}}>$</span> <input required id="cosnew" className='hover:bg-[#e2e8f0]' style={{border:"none",borderTopRightRadius:"5px",borderBottomRightRadius:"5px",color:"black",backgroundColor:"#edf2f7",padding:"6px 0px 6px 10px",width:"82%"}} type='number' ></input>
+                    <p style={{border:"none",backgroundColor:"#edf2f7",borderRadius:"5px",padding:"2px 0px 2px 10px"}}><span style={{padding:"0px 10px"}}>$</span> <input required id="cosnew" className='hover:bg-[#e2e8f0]' style={{border:"none",borderTopRightRadius:"5px",borderBottomRightRadius:"5px",color:"black",backgroundColor:"#edf2f7",padding:"6px 0px 6px 10px",width:"82%"}} type='number' step=".01" ></input>
                     </p>
                   </span>
                   <span style={{width:"50%"}}>
@@ -609,12 +621,12 @@ function calanderView(){
                  </form>
                 </ModalBody>
                 <ModalFooter>
-                <button form='add-form' type='submit' onClick={addnewsub} style={{backgroundColor:"rgba(0,0,0,0.80)",borderRadius:"8px",border:"none", color:"white", width:"100%",padding:"12px 0px",fontSize:"18px"}}>Add Subscription</button>
+                <button form='add-form' type='submit'  onClick={()=>{addnewsub(event)}}  style={{backgroundColor:"rgba(0,0,0,0.80)",borderRadius:"8px",border:"none", color:"white", width:"100%",padding:"12px 0px",fontSize:"18px"}}>Add Subscription</button>
                 </ModalFooter>
             </Modal>
             <div style={{textAlign:"left"}}>     
                 <button onClick={projecttoggling} className='focus:outline-none px-2' id="fillters" style={{border:"1px solid rgba(0,0,0,0.16)",cursor:"pointer", backgroundColor:"#ffffff",borderRadius:"5px",padding:"10px 0px",borderRadius:"5px",fontSize:"15px",color:"#1a202c" }}><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" aria-hidden="true" focusable="false" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M20 5h-8.586L9.707 3.293A.997.997 0 0 0 9 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V7c0-1.103-.897-2-2-2zM4 19V7h16l.002 12H4z"></path></svg> <span id="probut">All Projects</span> <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" aria-hidden="true" focusable="false" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"></path></svg></button>
-                <div id="projct" style={{border:"1px solid #e2e8f0",borderRadius:"8px",fontSize:"17px",zIndex:"9999",boxShadow:"0 1px 2px 0 rgba(0,0,0,0.05)" ,position:"absolute",right:"1%",top:"9%",width:"15rem",display:"none",backgroundColor:"white",padding:"10px 0px"}}>
+                <div id="projct" style={{border:"1px solid #e2e8f0",borderRadius:"8px",fontSize:"17px",zIndex:"9999",boxShadow:"0 1px 2px 0 rgba(0,0,0,0.05)" ,position:"absolute",top:"9%",width:"15rem",display:"none",backgroundColor:"white",padding:"10px 0px"}}>
                 <button onClick={hideSVG} className='hover:bg-[#e2e8f0] focus:outline-none pl-3' style={{color: "inherit",width:"100%",border:"none",backgroundColor:"white",textAlign:"left",padding:"5px"}} value="allProjects"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" font-size="1.2rem" focusable="false" aria-hidden="true" class="chakra-menu__icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M22 7.999a1 1 0 0 0-.516-.874l-9.022-5a1.003 1.003 0 0 0-.968 0l-8.978 4.96a1 1 0 0 0-.003 1.748l9.022 5.04a.995.995 0 0 0 .973.001l8.978-5A1 1 0 0 0 22 7.999zm-9.977 3.855L5.06 7.965l6.917-3.822 6.964 3.859-6.918 3.852z"></path><path d="M20.515 11.126 12 15.856l-8.515-4.73-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5-.97-1.748z"></path><path d="M20.515 15.126 12 19.856l-8.515-4.73-.971 1.748 9 5a1 1 0 0 0 .971 0l9-5-.97-1.748z"></path></svg> All Projects</button>
                     <button onClick={showSVG} className='hover:bg-[#e2e8f0] focus:outline-none pl-3' style={{color: "inherit",width:"100%",border:"none",backgroundColor:"white",textAlign:"left",padding:"5px"}} value="openProjects"><svg id="svgTick" style={{display:"none"}} stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" font-size="1.2rem" focusable="false" aria-hidden="true" class="chakra-menu__icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="m10 15.586-3.293-3.293-1.414 1.414L10 18.414l9.707-9.707-1.414-1.414z"></path></svg><span id='personal' style={{paddingLeft:"19px"}}> Personal</span></button>
                     <hr></hr>
@@ -893,7 +905,7 @@ function calanderView(){
                     <span style={{width:"50%"}}>
                   <label style={{color:"rgba(0,0,0,0.64)"}} >Cost<span style={{color:"red"}}> *</span></label><br/><br/>
                  
-                    <p style={{border:"none",backgroundColor:"#edf2f7",borderRadius:"5px",padding:"2px 0px 2px 10px"}}><span style={{padding:"0px 10px"}}>$</span> <input id="cosup" className='hover:bg-[#e2e8f0]' style={{border:"none",borderTopRightRadius:"5px",borderBottomRightRadius:"5px",color:"black",backgroundColor:"#edf2f7",padding:"6px 0px 6px 10px",width:"82%"}} type='number' defaultValue={datamodal.cost}></input>
+                    <p style={{border:"none",backgroundColor:"#edf2f7",borderRadius:"5px",padding:"2px 0px 2px 10px"}}><span style={{padding:"0px 10px"}}>$</span> <input id="cosup" required className='hover:bg-[#e2e8f0]' style={{border:"none",borderTopRightRadius:"5px",borderBottomRightRadius:"5px",color:"black",backgroundColor:"#edf2f7",padding:"6px 0px 6px 10px",width:"82%"}} type='number' step=".01" defaultValue={datamodal.cost}></input>
                     </p>
                   </span>
                   <span style={{width:"50%"}}>

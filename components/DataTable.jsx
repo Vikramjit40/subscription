@@ -39,14 +39,16 @@ const SortingTable = props => {
   const [datamodal, setDataModel] = useState();
   const [selecVal, setSelecVal] = useState();
   const [subname, setSubname] = useState();
-
+  const [handle,setHandle]=useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [modal1, setModal1] = useState(false);
   const [modal2, setModal2] = useState(false);
   const [modal3, setModal3] = useState(false);
   const [modal4, setModal4] = useState(false);
+  var filteredSubs="";
+  const [filtrue,setFiltrue]=useState(false);
   const rightNavToggling = () => setModal3(!modal3);
-  const toggle1 = () => setModal1(!modal1);
+  const toggle1 = () => {setModal1(!modal1);}
   const toggle2 = () => setModal2(!modal2);
   const toggle4 = () => setModal4(!modal4);
   const [media, setMedia] = useState(false);
@@ -205,6 +207,21 @@ const SortingTable = props => {
     }
     return false;
   }
+
+function handleChange(event){
+ 
+  setHandle(event.target.value)
+  // filteredSubs= modata.filter(
+  //   ({ first_name, category }) =>
+  //   first_name.toLowerCase().includes(handle.toLowerCase()) ||
+  //     category.toLowerCase().includes(handle.toLowerCase())
+  // );
+  // setTimeout(() => {
+  //   setFiltrue(true);
+  // }, 1000);
+  
+  
+}
 
 
   function inactive(index, item) {
@@ -531,7 +548,31 @@ const SortingTable = props => {
               <button id="fillters" onClick={toggle1} className='focus' style={{ borderRadius: "5px", fontSize: "15px", padding: "4px 10px", display: "flex", backgroundColor: "#edf2f7" }}><div style={{ display: "flex" }}><svg stroke="currentColor" fill="#718096" stroke-width="0" viewBox="0 0 24 24" focusable="false" class="chakra-icon css-lgbjuw" height="2em" width="1.5em" xmlns="http://www.w3.org/2000/svg"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"></path></svg><p className='ml-1 mt-1 ' style={{ color: "rgba(0,0,0,0.64)", fontWeight: "bold" }}>Search</p></div><div className='ml-3' style={{ fontSize: "13px", marginTop: "8px" }}><kbd style={{ color: "black", backgroundColor: "white", fontWeight: "bold" }}>Ctrl</kbd><kbd className=" ml-1 " style={{ color: "black", backgroundColor: "white", fontWeight: "bold" }}>K</kbd></div></button>
             </div>
             <Modal style={{ overflow: "hidden", borderRadius: "10px", zIndex: "1", borderColor: "rgb(19,128,228)", boxShadow: "rgb(19,128,228) 0px 0px 0px 1px", outline: "0" }} isOpen={modal1} fade={true} toggle={toggle1} className='mod ' >
-              <ModalBody ><div style={{ display: "flex" }}><div className='mt-2'><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" focusable="false" class="chakra-icon css-lgbjuw" height="2em" width="1.5em" xmlns="http://www.w3.org/2000/svg"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"></path></svg></div><input className='focus' style={{ width: "100%", padding: "8px 10px", fontSize: "20px", backgroundColor: "white", color: "black" }} type='text' placeholder='Search by name, category or tags'></input></div></ModalBody>
+              <ModalBody ><div style={{ display: "flex" }}><div className='mt-2'><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" focusable="false" class="chakra-icon css-lgbjuw" height="2em" width="1.5em" xmlns="http://www.w3.org/2000/svg"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"></path></svg></div><input id="fltri" className='focus' style={{ width: "100%", padding: "8px 10px", fontSize: "20px", backgroundColor: "white", color: "black" }} type='text' placeholder='Search by name or category' onChange={handleChange} ></input></div>
+              <div>
+              {modata
+        .filter(item => {
+          if (!handle) return false
+          if (item.first_name.toLowerCase().includes(handle.toLowerCase()) || item.category.toLowerCase().includes(handle.toLowerCase())) {
+            return true
+          }
+        })
+        .map(item => (
+              <Card style={{ backgroundColor: item.color, borderRadius: "8px", width: "100%" }} >
+                      <Card.Content >
+                        <img src={item.image} className='left floated mt-2 mr-1 w-11 h-11' style={{ borderRadius: "50px" }} />
+                        <Card.Header className='left floated' style={
+                          { marginTop: "10px", color: "white" }
+                        } > {item.first_name}</Card.Header>
+                        <Card.Header className='right floated' style={
+                          { marginTop: "13px", fontSize: "15px", color: "white" }
+                        } > $ {item.cost}</Card.Header>
+                        <Card.Description style={{ color: "white" }} ><p className='left floated ml-12'> {item.category} </p><p className='right floated'>/ {item.period}</p></Card.Description>
+                      </Card.Content>
+                    </Card>))}
+              
+              </div>
+              </ModalBody>
             </Modal>
 
 
